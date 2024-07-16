@@ -58,10 +58,12 @@ function createCalendar() {
         dateClick: function(info) {
             calendar.changeView('dayGridDay', info.dateStr);
         },
+        height: 'auto',
         eventBorderColor: 'black',
         titleFormat: { day: 'numeric', year: 'numeric', month: 'long' },
         eventDisplay: 'block',
-        displayEventEnd: true,
+        displayEventTime: screen.width > 900,
+        displayEventEnd: screen.width > 900,
         eventBorderColor: 'gray',
         eventSources : [
             {
@@ -77,9 +79,11 @@ function createCalendar() {
             arg.el.style.display = "none";
             }
             arg.el.style.backgroundColor = colors[arg.event.extendedProps.category];
-            const span = document.createElement("span");
-            span.textContent = "📍" + arg.event.extendedProps.location;
-            arg.el.getElementsByClassName("fc-event-main-frame")[0].append(span);
+            if (screen.width > 900) {
+                const span = document.createElement("span");
+                span.textContent = "📍" + arg.event.extendedProps.location;
+                arg.el.getElementsByClassName("fc-event-main-frame")[0].append(span);
+            }
             arg.el.style.cursor = "pointer";
         },
     });

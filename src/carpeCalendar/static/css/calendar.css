@@ -25,6 +25,7 @@ body {
 
 .fc-event-title {
     font-weight: 700;
+    word-wrap: break-word;
 }
 
 .dot {
@@ -55,7 +56,6 @@ body {
 @media only screen and (max-width: 900px) {
     #calendar {
         margin-left: 0;
-        height: 100%;
     }
     .fc-toolbar.fc-header-toolbar {
         display: flex;
