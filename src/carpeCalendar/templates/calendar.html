@@ -12,7 +12,7 @@
     <nav class="navbar bg-body-tertiary navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="https://carpestudentem.be">
-                <img src="https://www.carpestudentem.be/wp-content/uploads/2023/09/bubulle.png" class="me-3" alt="carpestudentem" width="50"> Agenda du Carpe
+                <img src="https://www.carpestudentem.be/wp-content/uploads/2023/09/bubulle.png" class="me-3" alt="carpestudentem" width="50"><span class="sidebar-title">Agenda du Carpe</span>
             </a>
         </div>
     </nav>
@@ -29,8 +29,8 @@
                 <div class="accordion-body">
                     {% for category in categories %}
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ category.category }}" name="{{ category.category }}" id="checkbox-{{ category.category }}" checked/>
-                        <label class="form-check-label" for="flexCheckChecked">{{ category.category }}<span class="dot" id="dot-{{ category.category }}"></span></label>
+                        <input class="form-check-input" type="checkbox" value="{{ category }}" name="{{ category }}" id="checkbox-{{ category }}" checked/>
+                        <label class="form-check-label" for="flexCheckChecked">{{ category }}</label>
                     </div>
                     {% endfor %}
                 </div>
@@ -45,11 +45,16 @@
             </h2>
            <div id="collapse-places" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-places" data-mdb-parent="#sidebar-accordion">
                 <div class="accordion-body">
-
+                    {% for place in places %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ place }}" name="{{ place }}" id="checkbox-place-{{ place }}" checked/>
+                        <label class="form-check-label" for="flexCheckChecked">{{ place }}<span class="dot" id="dot-{{ place }}"></span></label>
+                    </div>
+                    {% endfor %}
                 </div>
            </div>
         </section>
-        <section class="categories accordion-item">
+        <!-- <section class="categories accordion-item">
             <h2 class="accordion-header" id="heading-export">
                 <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
                     data-mdb-target="#collapse-export" aria-expanded="false" aria-controls="collapse-export">
@@ -61,7 +66,7 @@
 
                 </div>
            </div>
-        </section>
+        </section> -->
         <section class="categories accordion-item">
             <h2 class="accordion-header" id="heading-edit">
                 <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
@@ -72,8 +77,8 @@
            <div id="collapse-edit" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-edit" data-mdb-parent="#sidebar-accordion">
                 <div class="accordion-body">
                     <a href="/add-event">Ajouter un événement</a><br>
-                    <a href="/report-event">Demander la modification/suppression d'un événement</a><br>
-                    <a href="/report-error">Signaler une erreur</a>
+                    <!-- <a href="/report-event">Demander la modification/suppression d'un événement</a><br>
+                    <a href="/report-error">Signaler une erreur</a> -->
                 </div>
            </div>
         </section>
@@ -89,7 +94,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.1.15/index.global.min.js"></script>
 <script>
     const categories = [];
-    {% for category in categories %}categories.push("{{ category.category }}");{% endfor %}
+    const places = [];
+    {% for category in categories %}categories.push("{{ category }}");{% endfor %}
+    {% for place in places %}places.push("{{ place }}");{% endfor %}
 </script>
 <script src="{% static 'js/calendar.js' %}"></script>
 {% endblock %}
