@@ -20,11 +20,11 @@ const randomColors = [
     "#D2691E"  // Chocolate
 ];
 
-function initCategoryColors () {
-    for (category of categories) {
-        colors[category] = randomColors[Math.floor(Math.random() * randomColors.length)];
-        const dot = document.getElementById("dot-" + category);
-        dot.style.backgroundColor = colors[category];
+function initPlaceColors() {
+    for (place of places) {
+        colors[place] = randomColors[Math.floor(Math.random() * randomColors.length)];
+        const dot = document.getElementById("dot-" + place);
+        dot.style.backgroundColor = colors[place];
     }
 }
 
@@ -55,8 +55,9 @@ function createCalendar() {
             today: 'Aujourd\'hui',
 
         },
-        dateClick: function(info) {
-            calendar.changeView('dayGridDay', info.dateStr);
+        navLinks: true,
+        navLinkDayClick: function(date) {
+            calendar.changeView('dayGridDay', date.toISOString());
         },
         height: 'auto',
         eventBorderColor: 'black',
@@ -74,11 +75,12 @@ function createCalendar() {
             location.href = "/event/" + info.event.id;
         },
         eventDidMount: function(arg) {
-            const element = document.getElementById("checkbox-" + arg.event.extendedProps.category);
-            if (element && !element.checked) {
-            arg.el.style.display = "none";
+            const element = document.getElementById("checkbox-" + arg.event.extendedProps.category.name);
+            const placeElement = document.getElementById("checkbox-place-" + arg.event.extendedProps.saved_location.name);
+            if (!element.checked || !placeElement.checked) {
+                arg.el.style.display = "none";
             }
-            arg.el.style.backgroundColor = colors[arg.event.extendedProps.category];
+            arg.el.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
             if (screen.width > 900) {
                 const span = document.createElement("span");
                 span.textContent = "📍" + arg.event.extendedProps.location;
@@ -93,9 +95,14 @@ function createCalendar() {
             calendar.refetchEvents();
         });
     }
+    for (place of places) {
+        document.getElementById("checkbox-place-" + place).addEventListener("change", function() {
+            calendar.refetchEvents();
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    initCategoryColors();
+    initPlaceColors();
     createCalendar();
 });
