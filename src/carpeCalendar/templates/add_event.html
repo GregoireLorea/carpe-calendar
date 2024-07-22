@@ -1,6 +1,17 @@
 {% extends "base.html"%}
 
 {% block body %}
+{% if status == "success" %}
+<div class="alert alert-success" role="alert">
+    Evènment ajouté avec succès !
+</div>
+{% endif %}
+{% if status == "error" %}
+<div class="alert alert-danger" role="alert">
+    Une erreur est survenue lors de l'ajout de l'évènement.
+</div>
+{% endif %}
+
 <form method="POST">
     {% csrf_token %}
     <div class="mb-3">
@@ -28,7 +39,7 @@
         <label for="category" class="form-label">Catégorie</label>
         <select name="category" id="category" class="form-select">
             {% for category in categories %}
-                <option value="{{ category.category }}">{{ category.category }}</option>
+                <option value="{{ category }}">{{ category }}</option>
             {% endfor %}
         </select>
     </div>
