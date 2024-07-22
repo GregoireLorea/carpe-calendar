@@ -6,9 +6,9 @@ import json
 months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre"]
 days = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
 done = set()
-current = datetime.now()
+current = datetime.fromisoformat("2021-01-01")
 lst = []
-for i in range(100):
+for i in range(1500):
     print(i+1)
     r = requests.get(f"https://louvainfo.be/calendrier/?year={current.year}&month={current.month}&day={current.day}")
     soup = BeautifulSoup(r.text, "html.parser")
@@ -55,6 +55,8 @@ for i in range(100):
             else:
                 start, end = date[1].split(" - ")
             day_text, day, month = date[0].split()
+            if month == "août":
+                month = "aout"
             check_date = datetime(current.year, months.index(month)+1, int(day))
             while check_date.weekday() != days.index(day_text):
                 check_date += timedelta(days=365)
