@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh start.sh
+    volumes:
+      - .:/code
+      - .db_data/db.sqlite3:/db.sqlite3
+    ports:
+      - "8000:8000"
+    restart: always
