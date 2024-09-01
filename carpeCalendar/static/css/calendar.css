@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.fc-h-event {
+    display: block;
+    overflow: auto;
+    padding: 5px;
+}
+
+.fc-event-main-frame {
+    display: flex;
+    flex-direction: column;
+    text-wrap: balance;
+}
+
+.fc-daygrid-block-event .fc-event-time {
+    font-weight: normal;
+}
+
+.fc-event-time::before {
+    content: "🕛 ";
+}
+
+.fc-event-title {
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.dot {
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+#calendar {
+    margin-left: max(15vw, 200px);
+    height: 100vh;
+    padding: 10px;
+    padding-top: 25px;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: max(15vw, 200px);
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    border-right: 1px solid gray;
+}
+
+@media only screen and (max-width: 900px) {
+    #calendar {
+        margin-left: 0;
+    }
+    .fc-toolbar.fc-header-toolbar {
+        display: flex;
+        flex-direction: column;
+    }
+    .sidebar {
+        position: relative;
+        width: 100%;
+        border: 0;
+    }
+    .fc-dayGridWeek-button {
+        display: none;
+    }
+    .fc-addEvent-button {
+        display: none;
+    }
+    .fc-event-time::before {
+        content: "";
+    }
+  }
+
+.categories {
+    padding-left: 20px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #C52224 !important;
+}
+
+.fc-theme-bootstrap5 .fc-list, .fc-theme-bootstrap5 .fc-scrollgrid, .fc-theme-bootstrap5 td, .fc-theme-bootstrap5 th {
+    border: 1px solid var(--fc-border-color);
+}
