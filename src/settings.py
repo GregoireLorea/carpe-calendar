@@ -20,13 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m(_b(n&)#*$4+9+*0$m=1)%orh6mm!x54g^&x6zo+zg!x3wfml'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DJANGO_DEBUG", True)))
 if not DEBUG:
-    STATIC_ROOT = "/var/www/carpecalendar.com/static/"
+    STATIC_ROOT = BASE_DIR / "static"
+    SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 else:
+    SECRET_KEY = 'django-insecure-m(_b(n&)#*$4+9+*0$m=1)%orh6mm!x54g^&x6zo+zg!x3wfml'
     STATICFILES_DIRS = [
         BASE_DIR / "static",
         BASE_DIR / "carpeCalendar/static",
