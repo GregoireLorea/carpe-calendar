@@ -7,8 +7,15 @@ services:
       dockerfile: Dockerfile
     command: sh start.sh
     volumes:
-      - .:/code
-      - .db_data/db.sqlite3:/db.sqlite3
+      - /home/docker/data/carpe/:/code:rw
+      - /home/docker/data/carpe/db_data/db.sqlite3:/db.sqlite3:rw
     ports:
       - "8000:8000"
     restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.carpe.rule=Host(`carpe-calendar.kapucl.be`)"
+      - "traefik.http.services.carpe.loadbalancer.server.port=8000"
+      - "traefik.http.routers.carpe.tls=true"
+      - "traefik.http.routers.carpe.tls.certresolver=http"
+      - "traefik.http.routers.carpe.entrypoints=websecure"
