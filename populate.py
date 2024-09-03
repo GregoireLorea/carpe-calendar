@@ -2,7 +2,7 @@ import json
 
 from carpeCalendar.models import Event, EventDates, Category, Place
 
-content = json.load(open("../results.json"))
+content = json.load(open("results.json"))
 
 other_location = Place(name="Autre")
 other_location.save()
