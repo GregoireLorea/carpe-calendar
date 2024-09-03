@@ -6,9 +6,12 @@ class EventForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea)
     location = forms.CharField(max_length=200)
     category = forms.CharField(max_length=200)
+    organizer = forms.CharField(max_length=200)
+
+
+class DateForm(forms.Form):
     start = forms.DateTimeField()
     end = forms.DateTimeField()
-
 
     def clean(self):
         start = self.cleaned_data['start']
