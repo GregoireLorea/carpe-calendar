@@ -6,6 +6,9 @@ from django.db.models import Q
 from carpeCalendar.models import Event, EventDates, Category, Place
 from carpeCalendar.forms import EventForm
 
+def home(request):
+    return redirect('calendar')
+
 def calendar(request):
     places = Place.objects.all()
     categories = Category.objects.all()
