@@ -6,6 +6,7 @@ class Event(models.Model):
     location = models.CharField(max_length=200, blank=True)
     saved_location = models.ForeignKey('Place', on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    organizer = models.CharField(max_length=200, default="Non renseigné")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     validated = models.BooleanField(default=False)
