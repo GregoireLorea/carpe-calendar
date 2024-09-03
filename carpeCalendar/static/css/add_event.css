@@ -1,0 +1,10 @@
+.container-event-form {
+    margin: 20px;
+}
+
+.date-form-container {
+	display: flex;
+    flex-direction: row;
+	gap: 10px;
+    width: 100%;
+}

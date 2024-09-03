@@ -13,8 +13,26 @@
             Lieu: {{ event.location }}
             <br>
             Catégorie: {{ event.category }}
+            <br>
+            Organisateur: {{ event.organizer }}
         </p>
         <hr class="my-4">
+        <!-- display dates in table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Début</th>
+                    <th scope="col">Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for date in dates %}
+                    <tr>
+                        <td>{{ date.start | date:"d E Y à H\hi" }}</td>
+                        <td>{{ date.end   | date:"d E Y à H\hi" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
         <p>{{ event.description }}</p>
         <!-- <a class="btn btn-primary btn-lg" href="#" role="button">En savoir plus</a> -->
     </div>

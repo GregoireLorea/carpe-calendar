@@ -1,11 +1,11 @@
 const colors = {};
 
 const randomColors = [
-    "#E8ADB6",
-    "#CBADCC",
-    "#F9D9E1",
-    "#C9D6E5",
-    "#A0ACC6"
+    "#E3826F",
+    "#E4A9A4",
+    "#EFBA97",
+    "#F1CCBB",
+    "#E7D5C7",
 ];
 
 function initPlaceColors() {
@@ -52,7 +52,6 @@ function createCalendar() {
         titleFormat: { day: 'numeric', year: 'numeric', month: 'long' },
         eventDisplay: 'block',
         displayEventTime: screen.width > 900,
-        displayEventEnd: screen.width > 900,
         eventBorderColor: 'gray',
         eventSources : [
             {

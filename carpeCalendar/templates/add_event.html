@@ -1,5 +1,10 @@
 {% extends "base.html"%}
 
+{% block stylesheets %}
+{% load static %}
+<link href="{% static 'css/add_event.css' %}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
 {% block body %}
 {% if status == "success" %}
 <div class="alert alert-success" role="alert">
@@ -12,37 +17,55 @@
 </div>
 {% endif %}
 
-<form method="POST">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="title" class="form-label">Titre</label>
-        <input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp">
-        <div id="titleHelp" class="form-text">Le titre de votre événement.</div>
-    </div>
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input type="text" name="description" class="form-control" id="description">
-    </div>
-    <div class="mb-3">
-        <label for="start" class="form-label">Début</label>
-        <input type="datetime-local" name="start" id="start" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label for="end" class="form-label">Fin</label>
-        <input type="datetime-local" name="end" id="end" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label for="location" class="form-label">Lieu</label>
-        <input type="text" name="location" id="location" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label for="category" class="form-label">Catégorie</label>
-        <select name="category" id="category" class="form-select">
-            {% for category in categories %}
-                <option value="{{ category }}">{{ category }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-</form>
+<div class="container-event-form">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Titre</label>
+            <input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp">
+            <div id="titleHelp" class="form-text">Le titre de votre événement.</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" name="description" class="form-control" id="description">
+        </div>
+        <div class="mb-3">
+            <label for="organizer" class="form-label">Organisateur</label>
+            <input type="text" name="organizer" id="organizer" class="form-control">
+        </div>
+        <div id="dates-container">
+            <div class="mb-3 form-row align-items-center date-form-container">
+                <div class="col-sm-3 my-1">
+                    <label for="start" class="form-label">Début</label>
+                    <input type="datetime-local" name="start" id="start" class="form-control">
+                </div>
+                <div class="col-sm-3 my-1">
+                    <label for="end" class="form-label">Fin</label>
+                    <input type="datetime-local" name="end" id="end" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <button type="button" id="add-date" class="btn btn-primary">Ajouter une autre date</button>
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Lieu</label>
+            <input type="text" name="location" id="location" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Catégorie</label>
+            <select name="category" id="category" class="form-select">
+                {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{% load static %}
+<script src="{% static 'js/add_event.js' %}"></script>
 {% endblock %}
