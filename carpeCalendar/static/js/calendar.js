@@ -34,10 +34,11 @@ function createCalendar() {
         headerToolbar: {
             left: 'addEvent',
             center: 'title',
-            right: 'dayGridMonth,dayGridWeek,dayGridDay prev,next',
+            right: 'dayGridDay,dayGridWeek,dayGridMonth,listMonth prev,next',
         },
         buttonText: {
             month: 'Mois',
+            listMonth: "Liste",
             week: 'Semaine',
             day: 'Jour',
             today: 'Aujourd\'hui',
@@ -51,7 +52,6 @@ function createCalendar() {
         eventBorderColor: 'black',
         titleFormat: { day: 'numeric', year: 'numeric', month: 'long' },
         eventDisplay: 'block',
-        displayEventTime: screen.width > 900,
         eventBorderColor: 'gray',
         eventSources : [
             {
@@ -67,8 +67,10 @@ function createCalendar() {
             if (!element.checked || !placeElement.checked) {
                 arg.el.style.display = "none";
             }
-            arg.el.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
-            if (screen.width > 900) {
+            // if (arg.view.type !== "listMonth") {
+                arg.el.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
+            // }
+            if (screen.width > 900 && arg.view.type !== "listMonth") {
                 const span = document.createElement("span");
                 span.textContent = "📍" + arg.event.extendedProps.location;
                 arg.el.getElementsByClassName("fc-event-main-frame")[0].append(span);

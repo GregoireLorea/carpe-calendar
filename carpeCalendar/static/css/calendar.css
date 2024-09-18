@@ -69,13 +69,16 @@ body {
     .fc-dayGridWeek-button {
         display: none;
     }
+    .fc-dayGridMonth-button {
+        display: none;
+    }
     .fc-addEvent-button {
         display: none;
     }
     .fc-event-time::before {
         content: "";
     }
-  }
+}
 
 .categories {
     padding-left: 20px;
