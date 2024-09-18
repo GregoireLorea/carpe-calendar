@@ -38,7 +38,7 @@ def add_event_page(request):
         ends = data.getlist('end')
         form = EventForm(data)
         if not form.is_valid():
-            return render(request, 'add_event.html', {'status': 'error', 'categories': categories})
+            return render(request, 'add_event.html', {'status': 'error', 'categories': categories, "initial": data})
         try:
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']

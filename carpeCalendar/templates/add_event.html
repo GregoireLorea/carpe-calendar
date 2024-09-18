@@ -22,26 +22,26 @@
         {% csrf_token %}
         <div class="mb-3">
             <label for="title" class="form-label">Titre</label>
-            <input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp">
+            <input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp" value="{{ initial.title }}" required>
             <div id="titleHelp" class="form-text">Le titre de votre événement.</div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="text" name="description" class="form-control" id="description">
+            <input type="text" name="description" class="form-control" id="description" value="{{ initial.description }}" required>
         </div>
         <div class="mb-3">
             <label for="organizer" class="form-label">Organisateur</label>
-            <input type="text" name="organizer" id="organizer" class="form-control">
+            <input type="text" name="organizer" id="organizer" class="form-control" value="{{ initial.organizer }}" required>
         </div>
         <div id="dates-container">
             <div class="mb-3 form-row align-items-center date-form-container">
                 <div class="col-sm-3 my-1">
                     <label for="start" class="form-label">Début</label>
-                    <input type="datetime-local" name="start" id="start" class="form-control">
+                    <input type="datetime-local" name="start" id="start" class="form-control" required>
                 </div>
                 <div class="col-sm-3 my-1">
                     <label for="end" class="form-label">Fin</label>
-                    <input type="datetime-local" name="end" id="end" class="form-control">
+                    <input type="datetime-local" name="end" id="end" class="form-control" required>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
         </div>
         <div class="mb-3">
             <label for="location" class="form-label">Lieu</label>
-            <input type="text" name="location" id="location" class="form-control">
+            <input type="text" name="location" id="location" class="form-control" value="{{ initial.value }}">
         </div>
         <div class="mb-3">
             <label for="category" class="form-label">Catégorie</label>
