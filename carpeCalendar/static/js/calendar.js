@@ -51,6 +51,7 @@ function createCalendar() {
         height: 'auto',
         eventBorderColor: 'black',
         titleFormat: { day: 'numeric', year: 'numeric', month: 'long' },
+        eventTimeFormat: { hour: 'numeric', minute: '2-digit', hour12: false },
         eventDisplay: 'block',
         eventBorderColor: 'gray',
         eventSources : [
