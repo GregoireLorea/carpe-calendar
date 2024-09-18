@@ -5,9 +5,9 @@ from .models import Category
 from .models import Place
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'location', 'saved_location', 'organizer', 'category', 'validated', 'get_dates']
+    list_display = ['title', 'location', 'saved_location', 'organizer', 'category', 'validated', 'get_dates', "created_at", "updated_at"]
     list_editable = ["validated"]
-    list_filter = ["validated", "category"]
+    list_filter = ["validated", "category", "created_at", "updated_at"]
     search_fields = ["title", "location"]
     actions = ["validate_selected_events", "invalidate_selected_events"]
 
