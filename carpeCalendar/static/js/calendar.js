@@ -45,6 +45,7 @@ function createCalendar() {
 
         },
         navLinks: true,
+        nextDayThreshold: '06:00:00',
         navLinkDayClick: function(date) {
             calendar.changeView('dayGridDay', date.toISOString());
         },
