@@ -15,6 +15,14 @@
             Catégorie: {{ event.category }}
             <br>
             Organisateur: {{ event.organizer }}
+            {% if event.facebook_link %}
+            <br>
+            Lien facebook: <a href="{{ event.facebook_link }}">{{ event.facebook_link }}</a>
+            {% endif %}
+            {% if event.form_link %}
+            <br>
+            Lien formulaire du formulaire d'inscription: <a href="{{ event.form_link }}">{{ event.form_link }}</a>
+            {% endif %}
         </p>
         <hr class="my-4">
         <!-- display dates in table -->

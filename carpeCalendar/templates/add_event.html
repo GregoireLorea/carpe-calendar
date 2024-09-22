@@ -14,6 +14,7 @@
 {% if status == "error" %}
 <div class="alert alert-danger" role="alert">
     Une erreur est survenue lors de l'ajout de l'évènement.
+    {{ messages }}
 </div>
 {% endif %}
 
@@ -21,26 +22,25 @@
     <form method="POST">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="title" class="form-label">Titre</label>
-            <input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp" value="{{ initial.title }}" required>
-            <div id="titleHelp" class="form-text">Le titre de votre événement.</div>
+            <label for="title" class="form-label required-label">Titre</label>
+            <input type="text" name="title" class="form-control" id="title" value="{{ initial.title }}" placeholder="Mon super événement" required>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" rows="8" class="form-control" id="description" value="{{ initial.description }}" required></textarea>
+            <label for="description" class="form-label required-label">Description</label>
+            <textarea name="description" rows="6" class="form-control" id="description" value="{{ initial.description }}" placeholder="Mon événement..." required></textarea>
         </div>
         <div class="mb-3">
-            <label for="organizer" class="form-label">Organisateur</label>
-            <input type="text" name="organizer" id="organizer" class="form-control" value="{{ initial.organizer }}" required>
+            <label for="organizer" class="form-label required-label">Organisateur</label>
+            <input type="text" name="organizer" id="organizer" class="form-control" value="{{ initial.organizer }}" placeholder="CarpeStudentem" required>
         </div>
         <div id="dates-container">
             <div class="mb-3 form-row align-items-center date-form-container">
                 <div class="col-sm-3 my-1">
-                    <label for="start" class="form-label">Début</label>
+                    <label for="start" class="form-label required-label">Début</label>
                     <input type="datetime-local" name="start" id="start" class="form-control" required>
                 </div>
                 <div class="col-sm-3 my-1">
-                    <label for="end" class="form-label">Fin</label>
+                    <label for="end" class="form-label required-label">Fin</label>
                     <input type="datetime-local" name="end" id="end" class="form-control" required>
                 </div>
             </div>
@@ -50,16 +50,29 @@
             <button type="button" id="remove-date" class="btn btn-danger">Supprimer la dernière date</button>
         </div>
         <div class="mb-3">
-            <label for="location" class="form-label">Lieu</label>
-            <input type="text" name="location" id="location" class="form-control" value="{{ initial.value }}">
+            <label for="location" class="form-label required-label">Lieu</label>
+            <input type="text" name="location" id="location" class="form-control" value="{{ initial.value }}" placeholder="La grande casa">
         </div>
         <div class="mb-3">
-            <label for="category" class="form-label">Catégorie</label>
+            <label for="category" class="form-label required-label">Catégorie</label>
             <select name="category" id="category" class="form-select">
                 {% for category in categories %}
-                    <option value="{{ category }}">{{ category }}</option>
+                <option value="{{ category }}">{{ category }}</option>
                 {% endfor %}
             </select>
+        </div>
+        <div class="mb-3">
+            <label for="facebook_link" class="form-label">Lien Facebook de l'évènement (facultatif)</label>
+            <input type="url" name="facebook_link" id="facebook_link" class="form-control" value="{{ initial.facebook_link }}" placeholder="https://facebook.com/events/mon-super-événement">
+        </div>
+        <div class="mb-3">
+            <label for="form_link" class="form-label">Lien du formulaire d'inscription (facultatif)</label>
+            <input type="url" name="form_link" id="form_link" class="form-control" value="{{ initial.form_link }}" aria-describedby="formHelp" placeholder="https://forms.gle/mon-super-formulaire">
+            <div id="formHelp" class="form-text">Lien du formulaire d'inscription: si votre événement a un formulaire d'inscription</div>
+        </div>
+        <div class="mb-3">
+            <label for="email_organizer" class="form-label">Email de l'organisateur (facultatif)</label>
+            <input type="email" name="email_organizer" id="email_organizer" class="form-control" placeholder="carpestudentem@gmail.com" value="{{ initial.email_organizer }}">
         </div>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
