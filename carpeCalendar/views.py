@@ -38,14 +38,26 @@ def add_event_page(request):
         ends = data.getlist('end')
         form = EventForm(data)
         if not form.is_valid():
-            return render(request, 'add_event.html', {'status': 'error', 'categories': categories, "initial": data})
+            return render(request, 'add_event.html', {'status': 'error', 'messages': form.errors, 'categories': categories, "initial": data})
         try:
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             location = form.cleaned_data['location']
             category = form.cleaned_data['category']
             organizer = form.cleaned_data['organizer']
-            event = Event(title=title, description=description, organizer=organizer, location=location, category=Category.objects.get(name=category))
+            facebook_link = form.cleaned_data["facebook_link"]
+            email_organizer = form.cleaned_data["email_organizer"]
+            form_link = form.cleaned_data["form_link"]
+            event = Event(
+                title=title,
+                description=description,
+                organizer=organizer,
+                location=location,
+                category=Category.objects.get(name=category),
+                facebook_link=facebook_link,
+                email_organizer=email_organizer,
+                form_link=form_link,
+            )
             event.saved_location = Place.objects.get(name=location) if Place.objects.filter(name=location).exists() else Place.objects.get(name='Autre')
             event.save()
             for start_time, end_time in zip(starts, ends):
