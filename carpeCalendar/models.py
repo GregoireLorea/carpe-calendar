@@ -3,8 +3,11 @@ from django.db import models
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    location = models.CharField(max_length=200, blank=True)
+    location = models.CharField(max_length=200)
     saved_location = models.ForeignKey('Place', on_delete=models.CASCADE, null=True, blank=True)
+    email_organizer = models.EmailField(max_length=200, blank=True, null=True)
+    facebook_link = models.URLField(max_length=200, blank=True, null=True)
+    form_link = models.URLField(max_length=200, blank=True, null=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     organizer = models.CharField(max_length=200, default="Non renseigné")
     created_at = models.DateTimeField(auto_now_add=True)
