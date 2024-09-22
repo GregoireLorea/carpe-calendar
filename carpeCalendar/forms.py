@@ -7,6 +7,19 @@ class EventForm(forms.Form):
     location = forms.CharField(max_length=200)
     category = forms.CharField(max_length=200)
     organizer = forms.CharField(max_length=200)
+    facebook_link = forms.URLField(max_length=200, required=False)
+    email_organizer = forms.EmailField(max_length=200, required=False)
+    form_link = forms.URLField(max_length=200, required=False)
+
+    def clean(self):
+        facebook_link = self.cleaned_data['facebook_link']
+        if facebook_link and not (
+            facebook_link.startswith('https://facebook.com') or
+            facebook_link.startswith('https://www.facebook.com') or
+            facebook_link.startswith('https://m.facebook.com') or
+            facebook_link.startswith('facebook.com')
+        ):
+            raise forms.ValidationError("Facebook link must be an event link")
 
 
 class DateForm(forms.Form):
