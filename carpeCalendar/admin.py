@@ -1,11 +1,12 @@
 from django.contrib import admin
 
 from .models import Event
+from .models import EventDates
 from .models import Category
 from .models import Place
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'location', 'saved_location', 'organizer', 'category', 'validated', 'get_dates', "created_at", "updated_at"]
+    list_display = ['title', 'location', 'saved_location', 'organizer', 'category', 'validated', 'get_dates', 'form_link', 'facebook_link', 'email_organizer', 'created_at']
     list_editable = ["validated"]
     list_filter = ["validated", "category", "created_at", "updated_at"]
     search_fields = ["title", "location"]
@@ -39,5 +40,6 @@ class PlaceAdmin(admin.ModelAdmin):
     list_editable = ['address', 'latitude', 'longitude']
 
 admin.site.register(Event, EventAdmin)
+admin.site.register(EventDates, EventDatesAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Place, PlaceAdmin)
