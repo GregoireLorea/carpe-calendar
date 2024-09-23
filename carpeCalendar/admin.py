@@ -11,6 +11,7 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ["validated", "category", "created_at", "updated_at"]
     search_fields = ["title", "location"]
     actions = ["validate_selected_events", "invalidate_selected_events"]
+    list_per_page = 10
 
     @admin.action(description="Validate selected events")
     def validate_selected_events(self, request, queryset):
