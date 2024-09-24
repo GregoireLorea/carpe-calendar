@@ -54,3 +54,11 @@ python manage.py runserver
 ## Contributions
 
 Contributions are welcome! Feel free to submit issues, suggestions, open issues, or pull requests to improve the project.
+
+## TODO
+
+* add week number according to uclouvain week system
+* subcategory
+* export to ics
+* better visualization of event and add event page
+* export week as image (png, jpg) from psd template
