@@ -34,7 +34,7 @@ else:
     ]
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ["https://carpe-calendar.kapucl.be"]
+CSRF_TRUSTED_ORIGINS = ["https://carpe-calendar.kapucl.be", "https://agenda.carpestudentem.be"]
 
 # Application definition
 
