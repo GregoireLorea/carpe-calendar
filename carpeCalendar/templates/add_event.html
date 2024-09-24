@@ -5,10 +5,16 @@
 <link href="{% static 'css/add_event.css' %}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 
+{% block sidebar-before-title %}
+<a href="javascript:history.back()">
+    <i class="fa-solid fa-arrow-left fa-lg"></i>
+</a>
+{% endblock %}
+
 {% block body %}
 {% if status == "success" %}
 <div class="alert alert-success" role="alert">
-    Evènment ajouté avec succès !
+    Evènement ajouté avec succès !
 </div>
 {% endif %}
 {% if status == "error" %}
