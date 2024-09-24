@@ -9,21 +9,53 @@
 <div class="event-container">
     <div class="jumbotron">
         <h1 class="display-4">{{ event.title }}</h1>
-        <p class="lead">
-            Lieu: {{ event.location }}
-            <br>
-            Catégorie: {{ event.category }}
-            <br>
-            Organisateur: {{ event.organizer }}
-            {% if event.facebook_link %}
-            <br>
-            Lien facebook: <a href="{{ event.facebook_link }}">{{ event.facebook_link }}</a>
-            {% endif %}
-            {% if event.form_link %}
-            <br>
-            Lien formulaire du formulaire d'inscription: <a href="{{ event.form_link }}">{{ event.form_link }}</a>
-            {% endif %}
-        </p>
+        <div>
+            <p class="lead">Lieu: {{ event.location }}</p>
+        </div>
+        <div>
+            <p class="lead">Catégorie: {{ event.category }}</p>
+        </div>
+        <div>
+            <p class="lead">Organisateur: {{ event.organizer }}</p>
+        </div>
+
+        {% if event.facebook_link %}
+        <div>
+            <p class="lead">Lien facebook: <a href="{{ event.facebook_link }}">{{ event.facebook_link }}</a></p>
+        </div>
+        {% endif %}
+
+        {% if event.form_link %}
+        <div>
+            <p class="lead">Lien formulaire du formulaire d'inscription: <a href="{{ event.form_link }}">{{ event.form_link }}</a></p>
+        </div>
+        {% endif %}
+
+        {% if event.pmr_friendly %}
+        <div>
+            <p class="lead">Accessible aux PMR ♿</p>
+        </div>
+        {% endif %}
+
+        {% if event.deaf_friendly %}
+        <div>
+            <p class="lead">Accessible aux ​déficiences visuelles 🧏</p>
+        </div>
+        {% endif %}
+
+        {% if event.blind_friendly %}
+        <div>
+            <p class="lead">Accessible aux déficiences auditives 🦯</p>
+        </div>
+        {% endif %}
+
+        {% if event.neurodiversity_friendly %}
+        <div>
+            <p class="lead">Accessible aux neurodivergences</p>
+        </div>
+        {% endif %}
+
+
         <hr class="my-4">
         <!-- display dates in table -->
         <table class="table">
