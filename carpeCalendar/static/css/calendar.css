@@ -45,6 +45,7 @@ body {
 .about {
     margin-left: max(15vw, 200px);
     padding: 20px;
+    margin-top: auto;
 }
 
 .sidebar {
