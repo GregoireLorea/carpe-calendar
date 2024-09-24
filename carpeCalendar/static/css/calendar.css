@@ -38,7 +38,6 @@ body {
 
 #calendar {
     margin-left: max(15vw, 200px);
-    height: 100vh;
     padding: 10px;
     padding-top: 25px;
 }
@@ -60,6 +59,7 @@ body {
 
 .social-logo {
     opacity: 0.5;
+    padding: 2px;
 }
 
 .social-logo:hover {
@@ -99,6 +99,13 @@ body {
 .categories {
     padding-top: 10px;
     padding-left: 20px;
+}
+
+.socials {
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
