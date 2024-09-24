@@ -7,111 +7,105 @@
     <link href="{% static 'css/calendar.css' %}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
-<section class="sidebar">
-    <nav class="navbar bg-body-tertiary navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="https://carpestudentem.be">
-                <img src="https://www.carpestudentem.be/wp-content/uploads/2023/09/bubulle.png" class="me-3" alt="carpestudentem" width="50"><span class="sidebar-title">Agenda du Carpe</span>
-            </a>
+{% block sidebar-content %}
+<div class="accordion" id="sidebar-accordion">
+    <!-- Categories selections -->
+    <section class="categories accordion-item">
+        <h2 class="accordion-header" id="heading-categories">
+            <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#collapse-categories" aria-expanded="true" aria-controls="collapse-categories">
+                <i class="fa-solid fa-list me-2"></i> Catégories
+            </button>
+        </h2>
+        <div id="collapse-categories" class="accordion-collapse collapse show" data-bs-parent="sidebar-accordion" aria-labelledby="heading-categories" data-mdb-parent="#sidebar-accordion">
+            <div class="accordion-body">
+                {% for category in categories %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ category }}" name="{{ category }}" id="checkbox-{{ category }}" checked/>
+                    <label class="form-check-label" for="flexCheckChecked">{{ category }}</label>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </nav>
-    <div class="accordion" id="sidebar-accordion">
-        <!-- Categories selections -->
-        <section class="categories accordion-item">
-            <h2 class="accordion-header" id="heading-categories">
-                <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                    data-mdb-target="#collapse-categories" aria-expanded="true" aria-controls="collapse-categories">
-                    <i class="fa-solid fa-list me-2"></i> Catégories
-                </button>
-            </h2>
-           <div id="collapse-categories" class="accordion-collapse collapse show" data-bs-parent="sidebar-accordion" aria-labelledby="heading-categories" data-mdb-parent="#sidebar-accordion">
-                <div class="accordion-body">
-                    {% for category in categories %}
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ category }}" name="{{ category }}" id="checkbox-{{ category }}" checked/>
-                        <label class="form-check-label" for="flexCheckChecked">{{ category }}</label>
-                    </div>
-                    {% endfor %}
+    </section>
+    <section class="categories accordion-item">
+        <h2 class="accordion-header" id="heading-places">
+            <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#collapse-places" aria-expanded="false" aria-controls="collapse-places">
+                <i class="fa-solid fa-location-dot me-2"></i> Lieux
+            </button>
+        </h2>
+        <div id="collapse-places" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-places" data-mdb-parent="#sidebar-accordion">
+            <div class="accordion-body">
+                {% for place in places %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ place }}" name="{{ place }}" id="checkbox-place-{{ place }}" checked/>
+                    <label class="form-check-label" for="flexCheckChecked">{{ place }}<span class="dot" id="dot-{{ place }}"></span></label>
                 </div>
-           </div>
-        </section>
-        <section class="categories accordion-item">
-            <h2 class="accordion-header" id="heading-places">
-                <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                    data-mdb-target="#collapse-places" aria-expanded="false" aria-controls="collapse-places">
-                    <i class="fa-solid fa-location-dot me-2"></i> Lieux
-                </button>
-            </h2>
-           <div id="collapse-places" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-places" data-mdb-parent="#sidebar-accordion">
-                <div class="accordion-body">
-                    {% for place in places %}
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ place }}" name="{{ place }}" id="checkbox-place-{{ place }}" checked/>
-                        <label class="form-check-label" for="flexCheckChecked">{{ place }}<span class="dot" id="dot-{{ place }}"></span></label>
-                    </div>
-                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="categories accordion-item">
+        <h2 class="accordion-header" id="heading-accessibility">
+            <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#collapse-accessibility" aria-expanded="false" aria-controls="collapse-accessibility">
+                <i class="fa-solid fa-bars me-2"></i> Accessibilité
+            </button>
+        </h2>
+        <div id="collapse-accessibility" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-accessibility" data-mdb-parent="#sidebar-accordion">
+            <div class="accordion-body">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="pmr_friendly" name="pmr_friendly" id="checkbox-pmr_friendly"/>
+                    <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux PMR</span></label>
                 </div>
-           </div>
-        </section>
-        <section class="categories accordion-item">
-            <h2 class="accordion-header" id="heading-accessibility">
-                <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                    data-mdb-target="#collapse-accessibility" aria-expanded="false" aria-controls="collapse-accessibility">
-                    <i class="fa-solid fa-bars me-2"></i> Accessibilité
-                </button>
-            </h2>
-           <div id="collapse-accessibility" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-accessibility" data-mdb-parent="#sidebar-accordion">
-                <div class="accordion-body">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="pmr_friendly" name="pmr_friendly" id="checkbox-pmr_friendly"/>
-                        <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux PMR</span></label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="blind_friendly" name="blind_friendly" id="checkbox-blind_friendly"/>
-                        <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux ​déficiences visuelles 🧏</span></label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="deaf_friendly" name="deaf_friendly" id="checkbox-deaf_friendly"/>
-                        <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux déficiences auditives 🦯</span></label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="neurodiversity_friendly" name="neurodiversity_friendly" id="checkbox-neurodiversity_friendly"/>
-                        <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux neurodivergences</span></label>
-                    </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="blind_friendly" name="blind_friendly" id="checkbox-blind_friendly"/>
+                    <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux ​déficiences visuelles 🧏</span></label>
                 </div>
-           </div>
-        </section>
-        <!-- <section class="categories accordion-item">
-            <h2 class="accordion-header" id="heading-export">
-                <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                    data-mdb-target="#collapse-export" aria-expanded="false" aria-controls="collapse-export">
-                    <i class="fa-solid fa-file-export me-2"></i> Exporter vers un agenda
-                </button>
-            </h2>
-           <div id="collapse-export" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-export" data-mdb-parent="#sidebar-accordion">
-                <div class="accordion-body">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="deaf_friendly" name="deaf_friendly" id="checkbox-deaf_friendly"/>
+                    <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux déficiences auditives 🦯</span></label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="neurodiversity_friendly" name="neurodiversity_friendly" id="checkbox-neurodiversity_friendly"/>
+                    <label class="form-check-label" for="flexCheckChecked">Uniquement accessible aux neurodivergences</span></label>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <section class="categories accordion-item">
+        <h2 class="accordion-header" id="heading-export">
+            <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#collapse-export" aria-expanded="false" aria-controls="collapse-export">
+                <i class="fa-solid fa-file-export me-2"></i> Exporter vers un agenda
+            </button>
+        </h2>
+        <div id="collapse-export" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-export" data-mdb-parent="#sidebar-accordion">
+            <div class="accordion-body">
 
-                </div>
-           </div>
-        </section> -->
-        <section class="categories accordion-item">
-            <h2 class="accordion-header" id="heading-edit">
-                <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                    data-mdb-target="#collapse-edit" aria-expanded="false" aria-controls="collapse-edit">
-                    <i class="fa-solid fa-pen-to-square me-2"></i> Ajouter / Modifier / Supprimer un événement
-                </button>
-            </h2>
-           <div id="collapse-edit" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-edit" data-mdb-parent="#sidebar-accordion">
-                <div class="accordion-body">
-                    <a href="/add-event">Ajouter un événement</a><br>
-                    <!-- <a href="/report-event">Demander la modification/suppression d'un événement</a><br>
-                    <a href="/report-error">Signaler une erreur</a> -->
-                </div>
-           </div>
-        </section>
-    </div>
-</section>
+            </div>
+        </div>
+    </section> -->
+    <section class="categories accordion-item">
+        <h2 class="accordion-header" id="heading-edit">
+            <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#collapse-edit" aria-expanded="false" aria-controls="collapse-edit">
+                <i class="fa-solid fa-pen-to-square me-2"></i> Ajouter / Modifier / Supprimer un événement
+            </button>
+        </h2>
+        <div id="collapse-edit" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-edit" data-mdb-parent="#sidebar-accordion">
+            <div class="accordion-body">
+                <a href="/add-event">Ajouter un événement</a><br>
+                <!-- <a href="/report-event">Demander la modification/suppression d'un événement</a><br>
+                <a href="/report-error">Signaler une erreur</a> -->
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block body %}
 <!-- Calendar Container -->
 <div id="calendar"></div>
 <footer class="about">

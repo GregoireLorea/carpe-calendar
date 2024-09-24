@@ -37,25 +37,13 @@ body {
 }
 
 #calendar {
-    margin-left: max(15vw, 200px);
     padding: 10px;
     padding-top: 25px;
 }
 
 .about {
-    margin-left: max(15vw, 200px);
     padding: 20px;
     margin-top: auto;
-}
-
-.sidebar {
-    margin: 0;
-    padding: 0;
-    width: max(15vw, 200px);
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-    border-right: 1px solid gray;
 }
 
 .social-logo {
@@ -68,20 +56,9 @@ body {
 }
 
 @media only screen and (max-width: 900px) {
-    #calendar {
-        margin-left: 0;
-    }
-    .about {
-        margin-left: 0;
-    }
     .fc-toolbar.fc-header-toolbar {
         display: flex;
         flex-direction: column;
-    }
-    .sidebar {
-        position: relative;
-        width: 100%;
-        border: 0;
     }
     .fc-dayGridWeek-button {
         display: none;
