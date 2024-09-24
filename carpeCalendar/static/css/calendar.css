@@ -58,6 +58,14 @@ body {
     border-right: 1px solid gray;
 }
 
+.social-logo {
+    opacity: 0.5;
+}
+
+.social-logo:hover {
+    opacity: 1;
+}
+
 @media only screen and (max-width: 900px) {
     #calendar {
         margin-left: 0;
@@ -89,6 +97,7 @@ body {
 }
 
 .categories {
+    padding-top: 10px;
     padding-left: 20px;
 }
 
