@@ -30,11 +30,17 @@ function createCalendar() {
                     location.href = "/add-event";
                 }
             },
+            today: {
+                text: 'Aujourd\'hui',
+                click: function() {
+                    calendar.today();
+                }
+            }
         },
         locale: 'fr',
         firstDay: 1,
         headerToolbar: {
-            left: 'addEvent',
+            left: 'addEvent,today',
             center: 'title',
             right: 'dayGridDay,dayGridWeek,dayGridMonth,listMonth prev,next',
         },
