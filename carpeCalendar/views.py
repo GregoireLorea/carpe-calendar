@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render, redirect
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
@@ -17,6 +19,10 @@ def calendar(request):
 def events(request):
     start = request.GET.get('start', None)
     end = request.GET.get('end', None)
+    end_dt = datetime.datetime.strptime(end, '%Y-%m-%dT%H:%M:%S%z')
+    start_dt = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
+    if (end_dt - start_dt).days > 90:
+        return JsonResponse([], safe=False)
     dates_lst = list(EventDates.objects.filter(Q(Q(start__range=[start, end]) | Q(end__range=[start, end]) | Q(start__lte=start, end__gte=end)), event__validated=True).select_related('event', 'event__category', 'event__saved_location'))
     events_lst = []
     for date in dates_lst:
@@ -40,23 +46,22 @@ def add_event_page(request):
         if not form.is_valid():
             return render(request, 'add_event.html', {'status': 'error', 'messages': form.errors, 'categories': categories, "initial": data})
         try:
-            title = form.cleaned_data['title']
-            description = form.cleaned_data['description']
             location = form.cleaned_data['location']
             category = form.cleaned_data['category']
-            organizer = form.cleaned_data['organizer']
-            facebook_link = form.cleaned_data["facebook_link"]
-            email_organizer = form.cleaned_data["email_organizer"]
-            form_link = form.cleaned_data["form_link"]
+            print(form.cleaned_data)
             event = Event(
-                title=title,
-                description=description,
-                organizer=organizer,
-                location=location,
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                organizer=form.cleaned_data['organizer'],
+                location=form.cleaned_data['location'],
                 category=Category.objects.get(name=category),
-                facebook_link=facebook_link,
-                email_organizer=email_organizer,
-                form_link=form_link,
+                facebook_link=form.cleaned_data["facebook_link"],
+                email_organizer=form.cleaned_data["email_organizer"],
+                form_link=form.cleaned_data["form_link"],
+                pmr_friendly=form.cleaned_data["pmr_friendly"],
+                deaf_friendly=form.cleaned_data["deaf_friendly"],
+                blind_friendly=form.cleaned_data["blind_friendly"],
+                neurodiversity_friendly=form.cleaned_data["neurodiversity_friendly"],
             )
             event.saved_location = Place.objects.get(name=location) if Place.objects.filter(name=location).exists() else Place.objects.get(name='Autre')
             event.save()
