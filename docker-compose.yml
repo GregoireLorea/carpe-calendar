@@ -6,8 +6,6 @@ services:
     command: sh start.sh
     volumes:
       - /home/docker/data/carpe/:/code:rw
-    ports:
-      - "8000:8000"
     restart: always
     labels:
       - "traefik.enable=true"
