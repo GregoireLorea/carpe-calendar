@@ -16,12 +16,28 @@
     <!-- Favicon -->
     {% load static %}
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" >
+    <!-- Custom CSS -->
+     <link href="{% static 'css/base.css' %}" type="text/css" rel="stylesheet"/>
 
     {% block stylesheets %}{% endblock %}
     <title>{% block title %}Agenda du CarpeStudentem{% endblock %}</title>
 </head>
 <body>
-    {% block body %}{% endblock %}
+    <section class="sidebar">
+        <nav class="navbar bg-body-tertiary navbar-expand-lg navbar-light">
+            <div class="title-sidebar">
+                {% block sidebar-before-title %}{% endblock %}
+                <a class="navbar-brand" href="/">
+                    <img src="https://www.carpestudentem.be/wp-content/uploads/2023/09/bubulle.png" class="me-3" alt="carpestudentem" width="50"><span class="sidebar-title">Agenda du Carpe</span>
+                </a>
+                {% block sidebar-after-title %}{% endblock %}
+            </div>
+        </nav>
+        {% block sidebar-content %}{% endblock %}
+    </section>
+    <section class="main">
+        {% block body %}{% endblock %}
+    </section>
 </body>
 <!-- MDB -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
