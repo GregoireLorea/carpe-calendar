@@ -1,5 +1,7 @@
 const colors = {};
 
+const accessibility_list = ["blind_friendly", "deaf_friendly", "pmr_friendly", "neurodiversity_friendly"];
+
 const randomColors = [
     "#E3826F",
     "#E4A9A4",
@@ -66,12 +68,23 @@ function createCalendar() {
         eventDidMount: function(arg) {
             const element = document.getElementById("checkbox-" + arg.event.extendedProps.category.name);
             const placeElement = document.getElementById("checkbox-place-" + arg.event.extendedProps.saved_location.name);
-            if (!element.checked || !placeElement.checked) {
+            let display = false;
+            let atLeastOneChecked = false;
+            for (accessibility of accessibility_list) {
+                const accessibilityElement = document.getElementById("checkbox-" + accessibility);
+                atLeastOneChecked |= accessibilityElement.checked;
+                if (arg.event.extendedProps[accessibility] && accessibilityElement.checked) {
+                    display = true;
+                }
+            }
+            display |= !atLeastOneChecked;
+            display &= (element.checked && placeElement.checked);
+            if (!display) {
                 arg.el.style.display = "none";
             }
-            // if (arg.view.type !== "listMonth") {
-                arg.el.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
-            // }
+
+            arg.el.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
+
             if (screen.width > 900 && arg.view.type !== "listMonth") {
                 const span = document.createElement("span");
                 span.textContent = "📍" + arg.event.extendedProps.location;
@@ -88,6 +101,12 @@ function createCalendar() {
     }
     for (place of places) {
         document.getElementById("checkbox-place-" + place).addEventListener("change", function() {
+            calendar.refetchEvents();
+        });
+    }
+
+    for (accessibility of accessibility_list) {
+        document.getElementById("checkbox-" + accessibility).addEventListener("change", function() {
             calendar.refetchEvents();
         });
     }
