@@ -2,7 +2,7 @@ from django.db import models
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=200)
     saved_location = models.ForeignKey('Place', on_delete=models.CASCADE, null=True, blank=True)
     email_organizer = models.EmailField(max_length=200, blank=True, null=True)
@@ -10,6 +10,10 @@ class Event(models.Model):
     form_link = models.URLField(max_length=200, blank=True, null=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     organizer = models.CharField(max_length=200, default="Non renseigné")
+    pmr_friendly = models.BooleanField(default=False)
+    deaf_friendly = models.BooleanField(default=False)
+    blind_friendly = models.BooleanField(default=False)
+    neurodiversity_friendly = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     validated = models.BooleanField(default=False)
