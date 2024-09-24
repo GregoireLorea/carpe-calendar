@@ -21,17 +21,33 @@
 <div class="container-event-form">
     <form method="POST">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="title" class="form-label required-label">Titre</label>
-            <input type="text" name="title" class="form-control" id="title" value="{{ initial.title }}" placeholder="Mon super événement" required>
+        <div class="row">
+           <div class="col-sm mb-3">
+               <label for="title" class="form-label required-label">Titre</label>
+               <input type="text" name="title" class="form-control" id="title" value="{{ initial.title }}" placeholder="Mon super événement" required>
+           </div>
+           <div class="col-sm ms-md-1 mb-3">
+               <label for="organizer" class="form-label required-label">Organisateur</label>
+               <input type="text" name="organizer" id="organizer" class="form-control" value="{{ initial.organizer }}" placeholder="CarpeStudentem" required>
+           </div>
         </div>
-        <div class="mb-3">
+        <div class="row mb-3">
+            <div class="col-sm mb-3">
+                <label for="location" class="form-label required-label">Lieu</label>
+                <input type="text" name="location" id="location" class="form-control" value="{{ initial.value }}" placeholder="La grande casa">
+            </div>
+            <div class="col-sm ms-md-1 mb-3">
+                <label for="category" class="form-label required-label">Catégorie</label>
+                <select name="category" id="category" class="form-select">
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 col">
             <label for="description" class="form-label required-label">Description</label>
             <textarea name="description" rows="6" class="form-control" id="description" value="{{ initial.description }}" placeholder="Mon événement..." required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="organizer" class="form-label required-label">Organisateur</label>
-            <input type="text" name="organizer" id="organizer" class="form-control" value="{{ initial.organizer }}" placeholder="CarpeStudentem" required>
         </div>
         <div id="dates-container">
             <div class="mb-3 form-row align-items-center date-form-container">
@@ -49,30 +65,38 @@
             <button type="button" id="add-date" class="btn btn-primary">Ajouter une autre date</button>
             <button type="button" id="remove-date" class="btn btn-danger">Supprimer la dernière date</button>
         </div>
-        <div class="mb-3">
-            <label for="location" class="form-label required-label">Lieu</label>
-            <input type="text" name="location" id="location" class="form-control" value="{{ initial.value }}" placeholder="La grande casa">
-        </div>
-        <div class="mb-3">
-            <label for="category" class="form-label required-label">Catégorie</label>
-            <select name="category" id="category" class="form-select">
-                {% for category in categories %}
-                <option value="{{ category }}">{{ category }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="facebook_link" class="form-label">Lien Facebook de l'évènement (facultatif)</label>
-            <input type="url" name="facebook_link" id="facebook_link" class="form-control" value="{{ initial.facebook_link }}" placeholder="https://facebook.com/events/mon-super-événement">
-        </div>
-        <div class="mb-3">
-            <label for="form_link" class="form-label">Lien du formulaire d'inscription (facultatif)</label>
-            <input type="url" name="form_link" id="form_link" class="form-control" value="{{ initial.form_link }}" aria-describedby="formHelp" placeholder="https://forms.gle/mon-super-formulaire">
-            <div id="formHelp" class="form-text">Lien du formulaire d'inscription: si votre événement a un formulaire d'inscription</div>
-        </div>
+        <div class="row">
+            <div class="col-sm mb-3">
+                <label for="facebook_link" class="form-label">Lien Facebook de l'évènement (facultatif)</label>
+                <input type="url" name="facebook_link" id="facebook_link" class="form-control" value="{{ initial.facebook_link }}" placeholder="https://facebook.com/events/mon-super-événement">
+            </div>
+            <div class="col-sm ms-md-1 mb-3">
+                <label for="form_link" class="form-label">Lien du formulaire d'inscription (facultatif)</label>
+                <input type="url" name="form_link" id="form_link" class="form-control" value="{{ initial.form_link }}" aria-describedby="formHelp" placeholder="https://forms.gle/mon-super-formulaire">
+                <div id="formHelp" class="form-text">Lien du formulaire d'inscription: si votre événement a un formulaire d'inscription</div>
+            </div>
+         </div>
         <div class="mb-3">
             <label for="email_organizer" class="form-label">Email de l'organisateur (facultatif)</label>
             <input type="email" name="email_organizer" id="email_organizer" class="form-control" placeholder="carpestudentem@gmail.com" value="{{ initial.email_organizer }}">
+        </div>
+        <div class="row">
+            <div class="col-sm mb-3">
+                <input type="checkbox" name="pmr_friendly" id="pmr_friendly" {% if initial.pmr_friendly %}checked{% endif %}>
+                <label for="pmr_friendly" class="form-label">Accessibilité aux PMR</label>
+            </div>
+            <div class="col-sm ms-md-1 mb-3">
+                <input type="checkbox" name="deaf_friendly" id="deaf_friendly" {% if initial.deaf_friendly %}checked{% endif %}>
+                <label for="deaf-friendly" class="form-label">Accessibilité aux sourds et malentendants</label>
+            </div>
+            <div class="col-sm ms-md-1 mb-3">
+                <input type="checkbox" name="blind_friendly" id="blind_friendly" {% if initial.blind_friendly %}checked{% endif %}>
+                <label for="blind_friendly" class="form-label">Accessibilité aux aveugles et malvoyants</label>
+            </div>
+            <div class="col-sm ms-md-1 mb-3">
+                <input type="checkbox" name="neurodiversity_friendly" id="neurodiversity_friendly" {% if initial.neurodiversity_friendly %}checked{% endif %}>
+                <label for="neurodiversity_friendly" class="form-label">Accessibilité aux personnes neurodiverses</label>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
