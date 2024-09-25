@@ -65,3 +65,8 @@ Contributions are welcome! Feel free to submit issues, suggestions, open issues,
 * export week as image (png, jpg) from psd template
 * internalization
 * auto translate of title with deepl?
+* Add Progressive web app
+* Remake the event page design
+* better display of event block on calendar
+* tooltip for pc user
+* place selection existing one, else fill text
