@@ -40,9 +40,9 @@ function createCalendar() {
         locale: 'fr',
         firstDay: 1,
         headerToolbar: {
-            left: 'addEvent,today',
+            left: 'addEvent',
             center: 'title',
-            right: 'dayGridDay,dayGridWeek,dayGridMonth,listMonth prev,next',
+            right: 'dayGridDay,dayGridWeek,dayGridMonth,listMonth prev,today,next',
         },
         buttonText: {
             month: 'Mois',

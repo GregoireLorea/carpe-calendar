@@ -72,6 +72,13 @@ body {
     .fc-event-time::before {
         content: "";
     }
+    .fc-toolbar-chunk {
+        display: flex;
+        flex-direction: column;
+    }
+    .fc-toolbar-chunk .btn-group {
+        margin: 5px;
+    }
 }
 
 .categories {
