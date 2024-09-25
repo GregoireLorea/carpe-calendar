@@ -89,7 +89,14 @@ function createCalendar() {
                 arg.el.style.display = "none";
             }
 
-            arg.el.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
+            const dotEl = arg.el.getElementsByClassName('fc-list-event-dot')[0];
+            if (dotEl) {
+                dotEl.style.borderColor = colors[arg.event.extendedProps.saved_location.name];
+                // dotEl.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
+            }
+            else {
+                arg.el.style.backgroundColor = colors[arg.event.extendedProps.saved_location.name];
+            }
 
             if (screen.width > 900 && arg.view.type !== "listMonth") {
                 const span = document.createElement("span");
