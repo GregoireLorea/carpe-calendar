@@ -1,6 +1,6 @@
 const colors = {};
 
-const accessibility_list = ["blind_friendly", "deaf_friendly", "pmr_friendly", "neurodiversity_friendly"];
+const accessibilityList = ["blind_friendly", "deaf_friendly", "pmr_friendly", "neurodiversity_friendly"];
 
 const randomColors = [
     "#DCAEB1",
@@ -78,7 +78,7 @@ function createCalendar() {
             const placeElement = document.getElementById("checkbox-place-" + arg.event.extendedProps.saved_location.name);
             let display = false;
             let atLeastOneChecked = false;
-            for (accessibility of accessibility_list) {
+            for (accessibility of accessibilityList) {
                 const accessibilityElement = document.getElementById("checkbox-" + accessibility);
                 atLeastOneChecked |= accessibilityElement.checked;
                 if (arg.event.extendedProps[accessibility] && accessibilityElement.checked) {
@@ -120,7 +120,7 @@ function createCalendar() {
         });
     }
 
-    for (accessibility of accessibility_list) {
+    for (accessibility of accessibilityList) {
         document.getElementById("checkbox-" + accessibility).addEventListener("change", function() {
             calendar.refetchEvents();
         });
