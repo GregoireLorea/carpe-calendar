@@ -70,3 +70,7 @@ Contributions are welcome! Feel free to submit issues, suggestions, open issues,
 * better display of event block on calendar
 * tooltip for pc user
 * place selection existing one, else fill text
+* add map or link to open map app
+* captcha
+* a second calendar for registration limit
+* event update (link send to organizer then update for a fixed limit time period)
