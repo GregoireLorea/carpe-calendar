@@ -51,10 +51,6 @@
                 </select>
             </div>
         </div>
-        <div class="mb-3 col">
-            <label for="description" class="form-label required-label">Description</label>
-            <textarea name="description" rows="6" class="form-control" id="description" value="{{ initial.description }}" placeholder="Mon événement..." required></textarea>
-        </div>
         <div id="dates-container">
             <div class="mb-3 form-row align-items-center date-form-container">
                 <div class="col-sm-3 my-1">
@@ -70,6 +66,10 @@
         <div class="mb-3">
             <button type="button" id="add-date" class="btn btn-primary">Ajouter une autre date</button>
             <button type="button" id="remove-date" class="btn btn-danger">Supprimer la dernière date</button>
+        </div>
+        <div class="mb-3 col">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" rows="6" class="form-control" id="description" value="{{ initial.description }}" placeholder="Mon événement..."></textarea>
         </div>
         <div class="row">
             <div class="col-sm mb-3">
