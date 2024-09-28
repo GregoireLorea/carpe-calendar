@@ -3,13 +3,14 @@ const colors = {};
 const accessibilityList = ["blind_friendly", "deaf_friendly", "pmr_friendly", "neurodiversity_friendly"];
 
 const randomColors = [
-    "#DCAEB1",
-    "#E3BEAB",
-    "#CED5B3",
-    "#A0BAB9",
-    "#BADDE3",
-    "#C5CFE8",
-    "#D0E7CA",
+    "#E8ADB6",
+    "#CBADCC",
+    "#A0ACC6",
+    "#F75A3B",
+    "#3F4EB5",
+    "#8AC7AD",
+    "#8AC7AD",
+    "#9F63C4",
 ];
 
 function initPlaceColors() {
