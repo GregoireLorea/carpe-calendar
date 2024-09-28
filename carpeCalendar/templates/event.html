@@ -70,16 +70,22 @@
                     <th scope="col">Fin</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for date in dates %}
-                    <tr>
-                        <td>{{ date.start | date:"d E Y à H\hi" }}</td>
-                        <td>{{ date.end   | date:"d E Y à H\hi" }}</td>
-                    </tr>
-                {% endfor %}
+            <tbody id="dates-tbody">
             </tbody>
+        </table>
         <p>{{ event.description }}</p>
         <!-- <a class="btn btn-primary btn-lg" href="#" role="button">En savoir plus</a> -->
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    const dates = [
+        {% for date in dates %}
+            "{{ date }}",
+        {% endfor %}
+    ];
+</script>
+<script src="{% static 'js/event.js' %}"></script>
 {% endblock %}
