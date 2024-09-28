@@ -1,4 +1,5 @@
 import datetime
+import zoneinfo
 
 from django.shortcuts import render, redirect
 from django.forms.models import model_to_dict
@@ -48,7 +49,6 @@ def add_event_page(request):
         try:
             location = form.cleaned_data['location']
             category = form.cleaned_data['category']
-            print(form.cleaned_data)
             event = Event(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
@@ -66,7 +66,9 @@ def add_event_page(request):
             event.saved_location = Place.objects.get(name=location) if Place.objects.filter(name=location).exists() else Place.objects.get(name='Autre')
             event.save()
             for start_time, end_time in zip(starts, ends):
-                date = EventDates(event=event, start=start_time, end=end_time)
+                start_datetime = datetime.datetime.strptime(start_time, '%Y-%m-%dT%H:%M').replace(tzinfo=zoneinfo.ZoneInfo('Europe/Brussels'))
+                end_datetime = datetime.datetime.strptime(end_time, '%Y-%m-%dT%H:%M').replace(tzinfo=zoneinfo.ZoneInfo('Europe/Brussels'))
+                date = EventDates(event=event, start=start_datetime, end=end_datetime)
                 date.save()
 
 
