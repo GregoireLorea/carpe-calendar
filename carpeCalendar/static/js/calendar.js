@@ -13,6 +13,39 @@ const randomColors = [
     "#9F63C4",
 ];
 
+const getWeekNumber = (d) => {
+    // https://stackoverflow.com/a/27125580
+    // For 2024; no general solution....
+    // UCLouvain weeksystem change every year impossible to have a general rule
+    // Replace this by a dictionary?
+    const onejan = new Date(d.getFullYear(), 0, 1);
+    const week = Math.ceil((((d.getTime() - onejan.getTime()) / 86400000) + onejan.getDay() + 1) / 7);
+    if (d.getFullYear() === 2024) {
+        if (37 <= week && week <= 37 + 14) {
+            return "S" + (week - 37).toString();
+        }
+        if (week <= 37 + 14 + 2) {
+            return "Blocus";
+        }
+    }
+    if (d.getFullYear() === 2025) {
+        if ((2 <= week && week <= 4) || (5 + 13 + 2 + 2 < week && week <= 5 + 13 + 2 + 2 + 4)) {
+            return "Examens";
+        }
+        if ((5 + 13 + 2 < week && week <= 5 + 13 + 2 + 2)) {
+            return "Blocus";
+        }
+        if (week == 5 || (5 + 11 < week && week <= 5 + 11 + 2)) {
+            return "Congé";
+        }
+        if (week <= 5 + 13 + 2) {
+            const substract = week <= 5 + 11 ? 5 : 7;
+            return "S" + (week - substract).toString();
+        }
+    }
+    return "-";
+}
+
 function initPlaceColors() {
     for (place of places) {
         colors[place] = randomColors[Math.floor(Math.random() * randomColors.length)];
@@ -57,6 +90,10 @@ function createCalendar() {
         },
         navLinks: true,
         nextDayThreshold: '06:00:00',
+        weekNumbers: true,
+        weekNumberContent: function(obj) {
+            return getWeekNumber(obj.date);
+        },
         navLinkDayClick: function(date) {
             calendar.changeView('dayGridDay', date.toISOString());
         },
