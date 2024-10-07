@@ -75,7 +75,7 @@ def add_event_page(request):
         except Exception as e:
             print(e)
             return render(request, 'add_event.html', {'status': 'error', 'categories': categories})
-        return render(request, 'add_event.html', {'status': 'success', 'categories': categories})
+        return render(request, 'add_event.html', {'status': 'success', 'categories': categories, **model_to_dict(event)})
 
     form = EventForm()
     date_form = DateForm()

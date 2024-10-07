@@ -24,3 +24,39 @@ addDate.addEventListener('click', function() {
     `;
     datesContainer.appendChild(dateForm);
 });
+
+function createBasicQrCode(data, image, color = "black") {
+    console.log(data);
+    return new QRCodeStyling({
+        width: 500,
+        height: 500,
+        type: "canvas",
+        data: data,
+        image: image,
+        dotsOptions: {
+            color: color,
+            type: "rounded"
+        },
+        backgroundOptions: {
+            color: "#e9ebee",
+        },
+        imageOptions: {
+            crossOrigin: "anonymous",
+            margin: 20,
+        }
+    });
+}
+
+if (submitStatus === "success") {
+    const carpeQrCode = createBasicQrCode(carpeLink, bubulleUrl);
+    carpeQrCode.append(document.getElementById('qr-code-carpe'));
+
+    if (facebookLink !== "" && facebookLink !== undefined) {
+        const qrCode = createBasicQrCode(facebookLink, "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg", "#4267b2");
+        qrCode.append(document.getElementById('qr-code-facebook'));
+    }
+    if (formLink !== "" && formLink !== undefined) {
+        const qrCode = createBasicQrCode(formLink, "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Google_Forms_2020_Logo.svg/70px-Google_Forms_2020_Logo.svg.png", "#642bbf");
+        qrCode.append(document.getElementById('qr-code-form'));
+    }
+}
