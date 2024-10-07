@@ -74,34 +74,18 @@
             </div>
         </div>
     </section>
-    <!-- <section class="categories accordion-item">
-        <h2 class="accordion-header" id="heading-export">
-            <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#collapse-export" aria-expanded="false" aria-controls="collapse-export">
-                <i class="fa-solid fa-file-export me-2"></i> Exporter vers un agenda
-            </button>
-        </h2>
-        <div id="collapse-export" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-export" data-mdb-parent="#sidebar-accordion">
-            <div class="accordion-body">
-
-            </div>
-        </div>
-    </section> -->
-    <section class="categories accordion-item">
-        <h2 class="accordion-header" id="heading-edit">
-            <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#collapse-edit" aria-expanded="false" aria-controls="collapse-edit">
-                <i class="fa-solid fa-pen-to-square me-2"></i> Ajouter / Modifier / Supprimer un événement
-            </button>
-        </h2>
-        <div id="collapse-edit" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-edit" data-mdb-parent="#sidebar-accordion">
-            <div class="accordion-body">
-                <a href="/add-event">Ajouter un événement</a><br>
-                <!-- <a href="/report-event">Demander la modification/suppression d'un événement</a><br>
-                <a href="/report-error">Signaler une erreur</a> -->
-            </div>
+    <section class="categories">
+        <div class="sidebar-link">
+            <a href="{% url 'add_event' %}">Ajouter un événement</a>
         </div>
     </section>
+    <hr class="hr" />
+    <section class="categories">
+        <div class="sidebar-link">
+            <a href="{% url 'create_qr_code' %}">Créer un QR code perso</a>
+        </div>
+    </section>
+    <hr class="hr" />
 </div>
 {% endblock %}
 
