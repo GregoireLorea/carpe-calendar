@@ -6,7 +6,7 @@ body {
 .sidebar {
     margin: 0;
     padding: 0;
-    width: max(15vw, 200px);
+    width: max(15vw, 300px);
     position: fixed;
     height: 100%;
     overflow: auto;
@@ -14,7 +14,7 @@ body {
 }
 
 .main {
-    margin-left: max(15vw, 200px);
+    margin-left: max(15vw, 300px);
     padding: 10px;
 }
 
@@ -26,7 +26,19 @@ body {
     gap: 20px;
 }
 
-@media only screen and (max-width: 900px) {
+.sidebar-link {
+    display: block;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 30px;
+    font-size: 1.1em;
+}
+.sidebar-link a {
+    text-decoration: none;
+    color: #4F4F4F;
+}
+
+@media only screen and (max-width: 1100px) {
     .sidebar {
         position: relative;
         width: 100%;
