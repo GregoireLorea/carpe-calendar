@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
 {% load static %}
-<link href="{% static 'css/event.css' %}" type="text/css" rel="stylesheet"/>
+<link href="{% static 'css/create_qr_code.css' %}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 
 {% block sidebar-content %}
@@ -24,7 +24,57 @@
 {% endblock %}
 
 {% block body %}
+<section class="create-qr-page-section">
+    <section class="create-qr-form">
+        <div class="row mb-3">
+            <div class="col-sm mb-3">
+                <label for="qr-code-text" class="form-label">Texte ou URL</label>
+                <textarea id="qr-code-text" class="form-control" placeholder="Une URL, Texte, ..." rows="5">https://facebook.com</textarea>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm mb-3">
+                <label for="qr-code-image" class="form-label">Image</label>
+                <input type="file" id="qr-code-image" name="avatar" class="form-control" accept="image/png, image/jpeg, image/svg+xml" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm mb-3">
+                <label for="qr-code-color" class="form-label">Couleur</label>
+                <input type="color" id="qr-code-color" class="form-control">
+            </div>
+            <div class="col-sm mb-3">
+                <label for="qr-code-background-color" class="form-label">Couleur de fond</label>
+                <input type="color" id="qr-code-background-color" class="form-control" value="#ffffff">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm mb-3">
+                <label for="qr-code-color-corner-square" class="form-label">Couleur des carrés sur les coins</label>
+                <input type="color" id="qr-code-color-corner-square" class="form-control">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm mb-3">
+                <label for="qr-code-width" class="form-label">Largeur</label>
+                <input type="number" id="qr-code-width" class="form-control" value="500">
+            </div>
+            <div class="col-sm mb-3">
+                <label for="qr-code-height" class="form-label">Hauteur</label>
+                <input type="number" id="qr-code-height" class="form-control" value="500">
+            </div>
+    </section>
+    <section id="qr-display">
+        <div class="download-section">
+            <input type="button" id="generate-qr-code-svg" class="btn btn-primary" value="Télécharger le QR code en svg">
+            <input type="button" id="generate-qr-code-png" class="btn btn-primary" value="Télécharger le QR code en png">
+        </div>
+    </section>
+</section>
+
 {% endblock %}
 
 {% block javascripts %}
+<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+<script src="{% static 'js/create_qr_code.js' %}"></script>
 {% endblock %}
