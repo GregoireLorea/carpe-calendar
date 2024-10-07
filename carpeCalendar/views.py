@@ -37,6 +37,9 @@ def event(request, event_id):
     dates = EventDates.objects.filter(event=event)
     return render(request, 'event.html', {'event': event, 'dates': dates})
 
+def create_qr_code(request):
+    return render(request, 'create_qr_code.html')
+
 def add_event_page(request):
     categories = list(Category.objects.values_list('name', flat=True))
     if request.method == 'POST':

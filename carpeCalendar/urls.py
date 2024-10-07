@@ -9,4 +9,5 @@ urlpatterns = [
     path('event/<int:event_id>/', views.event, name='event'),
     path('events/', views.events, name='events'),
     path('add-event', views.add_event_page, name='add_event'),
+    path('create-qr-code', views.create_qr_code, name='create_qr_code'),
 ]
