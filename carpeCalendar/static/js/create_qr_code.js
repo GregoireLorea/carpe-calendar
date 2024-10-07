@@ -77,3 +77,21 @@ downloadSVG.addEventListener('click', () => {
 downloadPNG.addEventListener('click', () => {
     qrCode.download({ extension: "png" });
 });
+
+document.getElementById('create-payment-qr-code').addEventListener('click', function() {
+    const form = document.getElementById('payment-form');
+    if (form.checkValidity()) {
+        const iban = document.getElementById('iban').value;
+        const name = document.getElementById('name').value;
+        const bic = document.getElementById('bic').value;
+        const amount = document.getElementById('amount').value;
+        const communication = document.getElementById('communication').value;
+
+        textAreaData.value = `BCD\n002\n1\nSCT\n${bic}\n${name}\n${iban}\nEUR${amount}\n\n\n${communication}\nGénéré par carpestudentem.be`;
+        // Close the modal
+        document.getElementById('payment-close-modal').click();
+        textAreaData.dispatchEvent(new Event('input'));
+    } else {
+        form.reportValidity();
+    }
+});

@@ -24,8 +24,53 @@
 {% endblock %}
 
 {% block body %}
+<!-- Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="payementModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Créer un QR code de payement</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <form id="payment-form">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="iban" class="form-label">IBAN</label>
+                        <input type="text" class="form-control" id="iban" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bic" class="form-label">BIC (facultatif)</label>
+                        <input type="text" class="form-control" id="bic">
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Montant</label>
+                        <input type="number" class="form-control" id="amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="communication" class="form-label">Communication</label>
+                        <textarea class="form-control" id="communication" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="payment-close-modal" data-mdb-ripple-init data-mdb-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary btn-success" type="submit" id="create-payment-qr-code">Créer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="create-qr-page-section">
     <section class="create-qr-form">
+        <div class="p-2"></div>
+        <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#paymentModal">
+            Créer un QR code de payement
+        </button>
+        <div class="p-2"></div>
         <div class="row mb-3">
             <div class="col-sm mb-3">
                 <label for="qr-code-text" class="form-label">Texte ou URL</label>
