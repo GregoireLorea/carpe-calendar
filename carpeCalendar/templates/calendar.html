@@ -13,11 +13,11 @@
     <section class="categories accordion-item">
         <h2 class="accordion-header" id="heading-categories">
             <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#collapse-categories" aria-expanded="true" aria-controls="collapse-categories">
+                data-mdb-target="#collapse-categories" aria-expanded="false" aria-controls="collapse-categories">
                 <i class="fa-solid fa-list me-2"></i> Catégories
             </button>
         </h2>
-        <div id="collapse-categories" class="accordion-collapse collapse show" data-bs-parent="sidebar-accordion" aria-labelledby="heading-categories" data-mdb-parent="#sidebar-accordion">
+        <div id="collapse-categories" class="accordion-collapse collapse" data-bs-parent="sidebar-accordion" aria-labelledby="heading-categories" data-mdb-parent="#sidebar-accordion">
             <div class="accordion-body">
                 {% for category in categories %}
                 <div class="form-check">
