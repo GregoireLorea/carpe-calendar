@@ -1,145 +1,187 @@
 {% extends "base.html"%}
 
 {% block stylesheets %}
-{% load static %}
-<link href="{% static 'css/add_event.css' %}" type="text/css" rel="stylesheet"/>
+    {% load static %}
+    <link href="{% static 'css/add_event.css' %}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 
 {% block sidebar-content %}
-<div class="sidebar-link">
-    <a href="{% url 'calendar' %}">Agenda</a>
-</div>
-<hr class="hr" />
-<div class="sidebar-link">
-    <a href="{% url 'add_event' %}">Ajouter un évènement</a>
-</div>
-<hr class="hr" />
-<div class="sidebar-link">
-    <a href="{% url 'create_qr_code' %}">Créer un QR code perso</a>
-</div>
-<hr class="hr" />
-<div class="sidebar-link">
-    <a href="https://www.carpestudentem.be/couverture-devenements/demande-de-couverture/">Demander une couverture d'évènement</a>
-</div>
-<hr class="hr" />
-<div class="sidebar-link">
-    <a href="https://www.carpestudentem.be/locations/">Locations matos</a>
-</div>
-<hr class="hr" />
+    <div class="sidebar-link">
+        <a href="{% url 'calendar' %}">Agenda</a>
+    </div>
+    <hr class="hr" />
+    <div class="sidebar-link">
+        <a href="{% url 'add_event' %}">Ajouter un évènement</a>
+    </div>
+    <hr class="hr" />
+    <div class="sidebar-link">
+        <a href="{% url 'create_qr_code' %}">Créer un QR code perso</a>
+    </div>
+    <hr class="hr" />
+    <div class="sidebar-link">
+        <a href="https://www.carpestudentem.be/couverture-devenements/demande-de-couverture/">Demander une couverture d'évènement</a>
+    </div>
+    <hr class="hr" />
+    <div class="sidebar-link">
+        <a href="https://www.carpestudentem.be/locations/">Locations matos</a>
+    </div>
+    <hr class="hr" />
 {% endblock %}
 
 {% block body %}
-{% if status == "success" %}
-<div class="alert alert-success" role="alert">
-    Evènement ajouté avec succès ! Créez des qr codes pour vos évènements, pour les payements <a href="/create-qr-code">ici</a> <br>
-    <div class="qr-codes">
-        <div id="qr-code-carpe"></div>
-        <div id="qr-code-facebook"></div>
-        <div id="qr-code-form"></div>
-    </div>
-</div>
-{% endif %}
-{% if status == "error" %}
-<div class="alert alert-danger" role="alert">
-    Une erreur est survenue lors de l'ajout de l'évènement.
-    {{ messages }}
-</div>
-{% endif %}
+    {% if status == "success" %}
+        <div class="alert alert-success" role="alert">
+            Evènement ajouté avec succès ! Créez des qr codes pour vos évènements, pour les payements <a href="/create-qr-code">ici</a> <br>
+            <div class="qr-codes">
+                <div id="qr-code-carpe"></div>
+                <div id="qr-code-facebook"></div>
+                <div id="qr-code-form"></div>
+            </div>
+        </div>
+    {% endif %}
+    {% if status == "error" %}
+        <div class="alert alert-danger" role="alert">
+            Une erreur est survenue lors de l'ajout de l'évènement.
+            {{ messages }}
+        </div>
+    {% endif %}
 
-<div class="container-event-form">
-    <form method="POST">
-        {% csrf_token %}
-        <div class="row">
-           <div class="col-sm mb-3">
-               <label for="title" class="form-label required-label">Titre</label>
-               <input type="text" name="title" class="form-control" id="title" value="{{ initial.title }}" placeholder="Mon super événement" required>
-           </div>
-           <div class="col-sm ms-md-1 mb-3">
-               <label for="organizer" class="form-label required-label">Organisateur</label>
-               <input type="text" name="organizer" id="organizer" class="form-control" value="{{ initial.organizer }}" placeholder="CarpeStudentem" required>
-           </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm mb-3">
-                <label for="location" class="form-label required-label">Lieu</label>
-                <input type="text" name="location" id="location" class="form-control" value="{{ initial.value }}" placeholder="La grande casa">
-            </div>
-            <div class="col-sm ms-md-1 mb-3">
-                <label for="category" class="form-label required-label">Catégorie</label>
-                <select name="category" id="category" class="form-select">
-                    {% for category in categories %}
-                    <option value="{{ category }}">{{ category }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-        <div id="dates-container">
-            <div class="mb-3 form-row align-items-center date-form-container">
-                <div class="col-sm-3 my-1">
-                    <label for="start" class="form-label required-label">Début</label>
-                    <input type="datetime-local" name="start" id="start" class="form-control" required>
+    <div class="container-event-form">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="accordion" id="accordion-form">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-main">
+                        <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-target="#collapse-main" aria-expanded="true" aria-controls="collapse-main">
+                            Informations de base
+                        </button>
+                    </h2>
+                    <div id="collapse-main" class="accordion-collapse collapse show" aria-labelledby="heading-main" data-bs-parent="#accordion-form">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-sm mb-3">
+                                    <label for="title" class="form-label required-label">Titre</label>
+                                    <input type="text" name="title" class="form-control" id="title" value="{{ initial.title }}" placeholder="Mon super événement" required>
+                                </div>
+                                <div class="col-sm ms-md-1 mb-3">
+                                    <label for="organizer" class="form-label required-label">Organisateur</label>
+                                    <input type="text" name="organizer" id="organizer" class="form-control" value="{{ initial.organizer }}" placeholder="CarpeStudentem" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm mb-3">
+                                    <label for="location" class="form-label required-label">Lieu</label>
+                                    <input type="text" name="location" id="location" class="form-control" value="{{ initial.value }}" placeholder="La grande casa">
+                                </div>
+                                <div class="col-sm ms-md-1 mb-3">
+                                    <label for="category" class="form-label required-label">Catégorie</label>
+                                    <select name="category" id="category" class="form-select">
+                                        {% for category in categories %}
+                                            <option value="{{ category }}">{{ category }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="dates-container">
+                                <div class="mb-3 form-row align-items-center date-form-container">
+                                    <div class="col-sm-3 my-1">
+                                        <label for="start" class="form-label required-label">Début</label>
+                                        <input type="datetime-local" name="start" id="start" class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-3 my-1">
+                                        <label for="end" class="form-label required-label">Fin</label>
+                                        <input type="datetime-local" name="end" id="end" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" id="add-date" class="btn btn-primary">Ajouter une autre date</button>
+                                <button type="button" id="remove-date" class="btn btn-danger">Supprimer la dernière date</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-3 my-1">
-                    <label for="end" class="form-label required-label">Fin</label>
-                    <input type="datetime-local" name="end" id="end" class="form-control" required>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-details">
+                        <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-target="#collapse-details" aria-expanded="false" aria-controls="collapse-details">
+                            Détails : description, liens, etc. (facultatif)
+                        </button>
+                    </h2>
+                    <div id="collapse-details" class="accordion-collapse collapse" aria-labelledby="heading-details" data-bs-parent="#accordion-form">
+                        <div class="accordion-body">
+                            <div class="mb-3 col">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea name="description" rows="6" class="form-control" id="description" value="{{ initial.description }}" placeholder="Mon événement..."></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm mb-3">
+                                    <label for="facebook_link" class="form-label">Lien Facebook de l'évènement (facultatif)</label>
+                                    <input type="url" name="facebook_link" id="facebook_link" class="form-control" value="{{ initial.facebook_link }}" placeholder="https://facebook.com/events/mon-super-événement">
+                                </div>
+                                <div class="col-sm ms-md-1 mb-3">
+                                    <label for="form_link" class="form-label">Lien du formulaire d'inscription (facultatif)</label>
+                                    <input type="url" name="form_link" id="form_link" class="form-control" value="{{ initial.form_link }}" aria-describedby="formHelp" placeholder="https://forms.gle/mon-super-formulaire">
+                                    <div id="formHelp" class="form-text">Lien du formulaire d'inscription: si votre événement a un formulaire d'inscription</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email_organizer" class="form-label">Email de l'organisateur (facultatif)</label>
+                                <input type="email" name="email_organizer" id="email_organizer" class="form-control" placeholder="carpestudentem@gmail.com" value="{{ initial.email_organizer }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-accessibility">
+                        <button data-mdb-collapse-init class="accordion-button" type="button" data-mdb-target="#collapse-accessibility" aria-expanded="false" aria-controls="collapse-accessibility">
+                            Accessibilité (facultatif)
+                        </button>
+                    </h2>
+                    <div id="collapse-accessibility" class="accordion-collapse collapse" aria-labelledby="heading-accessibility" data-bs-parent="#accordion-form">
+                        <div class="accordion-body">
+                            <div class="mb-3 col">
+                                <input type="checkbox" name="granz_filled" id="granz_filled">
+                                <label for="granz_filled" class="form-label">
+                                    J'ai soumis ou vais soumettre un formulaire pour pour obtenir le <a href="https://granzensemble.wixsite.com/labelinclusion">label du GranzEnsemble</a>
+                                </label>
+                                <div class="form-text">Afin de pouvoir mettre le label sur notre site et nos valves, nous vous demandons de nous signaler si vous avez rempli ce formulaire.</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm mb-3">
+                                    <input type="checkbox" name="pmr_friendly" id="pmr_friendly" {% if initial.pmr_friendly %}checked{% endif %}>
+                                    <label for="pmr_friendly" class="form-label">Accessibilité aux PMR</label>
+                                </div>
+                                <div class="col-sm ms-md-1 mb-3">
+                                    <input type="checkbox" name="deaf_friendly" id="deaf_friendly" {% if initial.deaf_friendly %}checked{% endif %}>
+                                    <label for="deaf-friendly" class="form-label">Accessibilité aux sourds et malentendants</label>
+                                </div>
+                                <div class="col-sm ms-md-1 mb-3">
+                                    <input type="checkbox" name="blind_friendly" id="blind_friendly" {% if initial.blind_friendly %}checked{% endif %}>
+                                    <label for="blind_friendly" class="form-label">Accessibilité aux aveugles et malvoyants</label>
+                                </div>
+                                <div class="col-sm ms-md-1 mb-3">
+                                    <input type="checkbox" name="neurodiversity_friendly" id="neurodiversity_friendly" {% if initial.neurodiversity_friendly %}checked{% endif %}>
+                                    <label for="neurodiversity_friendly" class="form-label">Accessibilité aux personnes neurodiverses</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <button type="button" id="add-date" class="btn btn-primary">Ajouter une autre date</button>
-            <button type="button" id="remove-date" class="btn btn-danger">Supprimer la dernière date</button>
-        </div>
-        <div class="mb-3 col">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" rows="6" class="form-control" id="description" value="{{ initial.description }}" placeholder="Mon événement..."></textarea>
-        </div>
-        <div class="row">
-            <div class="col-sm mb-3">
-                <label for="facebook_link" class="form-label">Lien Facebook de l'évènement (facultatif)</label>
-                <input type="url" name="facebook_link" id="facebook_link" class="form-control" value="{{ initial.facebook_link }}" placeholder="https://facebook.com/events/mon-super-événement">
-            </div>
-            <div class="col-sm ms-md-1 mb-3">
-                <label for="form_link" class="form-label">Lien du formulaire d'inscription (facultatif)</label>
-                <input type="url" name="form_link" id="form_link" class="form-control" value="{{ initial.form_link }}" aria-describedby="formHelp" placeholder="https://forms.gle/mon-super-formulaire">
-                <div id="formHelp" class="form-text">Lien du formulaire d'inscription: si votre événement a un formulaire d'inscription</div>
-            </div>
-         </div>
-        <div class="mb-3">
-            <label for="email_organizer" class="form-label">Email de l'organisateur (facultatif)</label>
-            <input type="email" name="email_organizer" id="email_organizer" class="form-control" placeholder="carpestudentem@gmail.com" value="{{ initial.email_organizer }}">
-        </div>
-        <div class="row">
-            <div class="col-sm mb-3">
-                <input type="checkbox" name="pmr_friendly" id="pmr_friendly" {% if initial.pmr_friendly %}checked{% endif %}>
-                <label for="pmr_friendly" class="form-label">Accessibilité aux PMR</label>
-            </div>
-            <div class="col-sm ms-md-1 mb-3">
-                <input type="checkbox" name="deaf_friendly" id="deaf_friendly" {% if initial.deaf_friendly %}checked{% endif %}>
-                <label for="deaf-friendly" class="form-label">Accessibilité aux sourds et malentendants</label>
-            </div>
-            <div class="col-sm ms-md-1 mb-3">
-                <input type="checkbox" name="blind_friendly" id="blind_friendly" {% if initial.blind_friendly %}checked{% endif %}>
-                <label for="blind_friendly" class="form-label">Accessibilité aux aveugles et malvoyants</label>
-            </div>
-            <div class="col-sm ms-md-1 mb-3">
-                <input type="checkbox" name="neurodiversity_friendly" id="neurodiversity_friendly" {% if initial.neurodiversity_friendly %}checked{% endif %}>
-                <label for="neurodiversity_friendly" class="form-label">Accessibilité aux personnes neurodiverses</label>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-    </form>
-</div>
+            <button type="submit" id="submit-event" class="btn btn-primary ">Ajouter</button>
+        </form>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
-{% load static %}
-<script>
-    const submitStatus = "{{ status }}";
-    const facebookLink = "{{ facebook_link }}";
-    const formLink = "{{ form_link }}";
-    const carpeLink = "https://agenda.carpestudentem.be/event/{{ id }}";
-    const bubulleUrl = "{% static 'images/bubulle.png' %}";
-</script>
-<script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-<script src="{% static 'js/add_event.js' %}"></script>
+    {% load static %}
+    <script>
+        const submitStatus = "{{ status }}";
+        const facebookLink = "{{ facebook_link }}";
+        const formLink = "{{ form_link }}";
+        const carpeLink = "https://agenda.carpestudentem.be/event/{{ id }}";
+        const bubulleUrl = "{% static 'images/bubulle.png' %}";
+    </script>
+    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <script src="{% static 'js/add_event.js' %}"></script>
 {% endblock %}
