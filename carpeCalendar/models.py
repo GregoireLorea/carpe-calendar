@@ -14,6 +14,8 @@ class Event(models.Model):
     deaf_friendly = models.BooleanField(default=False)
     blind_friendly = models.BooleanField(default=False)
     neurodiversity_friendly = models.BooleanField(default=False)
+    granz_filled = models.BooleanField(default=False)
+    granz_validated = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     validated = models.BooleanField(default=False)

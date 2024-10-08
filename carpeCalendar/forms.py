@@ -15,6 +15,7 @@ class EventForm(forms.Form):
     deaf_friendly = forms.BooleanField(required=False)
     blind_friendly = forms.BooleanField(required=False)
     neurodiversity_friendly = forms.BooleanField(required=False)
+    granz_filled = forms.BooleanField(required=False)
 
     def clean(self):
         facebook_link = self.cleaned_data['facebook_link']

@@ -65,6 +65,7 @@ def add_event_page(request):
                 deaf_friendly=form.cleaned_data["deaf_friendly"],
                 blind_friendly=form.cleaned_data["blind_friendly"],
                 neurodiversity_friendly=form.cleaned_data["neurodiversity_friendly"],
+                granz_filled=form.cleaned_data["granz_filled"],
             )
             event.saved_location = Place.objects.get(name=location) if Place.objects.filter(name=location).exists() else Place.objects.get(name='Autre')
             event.save()
