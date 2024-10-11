@@ -33,7 +33,7 @@ const qrCode = new QRCodeStyling({
     }
 });
 
-qrCode.append(document.getElementById("qr-display"));
+qrCode.append(document.getElementById("qr-code"));
 
 const events = [
     { element: textAreaData, event: 'input', property: 'data' },
