@@ -21,7 +21,14 @@
     padding: 20px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1400px) {
+    #qr-code {
+        transform: scale(0.6);
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
     .create-qr-page-section {
         flex-direction: column;
     }
@@ -31,6 +38,10 @@
     }
 
     #qr-display {
-        width: 225px;
+        width: 100%;
+    }
+
+    #qr-code {
+        transform: scale(1);
     }
 }
