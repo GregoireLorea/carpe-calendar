@@ -19,6 +19,8 @@ class EventForm(forms.Form):
 
     def clean(self):
         facebook_link = self.cleaned_data['facebook_link']
+        return
+        # Check if facebook link is an event link
         if facebook_link and not (
             facebook_link.startswith('https://facebook.com') or
             facebook_link.startswith('https://www.facebook.com') or
