@@ -67,7 +67,7 @@ def add_event_page(request):
                 neurodiversity_friendly=form.cleaned_data["neurodiversity_friendly"],
                 granz_filled=form.cleaned_data["granz_filled"],
             )
-            event.saved_location = Place.objects.get(name=location) if Place.objects.filter(name=location).exists() else Place.objects.get(name='Autre')
+            event.saved_location = Place.objects.get(name__iexact=location) if Place.objects.filter(name__iexact=location).exists() else Place.objects.get(name='Autre')
             event.save()
             for start_time, end_time in zip(starts, ends):
                 start_datetime = datetime.datetime.strptime(start_time, '%Y-%m-%dT%H:%M').replace(tzinfo=zoneinfo.ZoneInfo('Europe/Brussels'))
