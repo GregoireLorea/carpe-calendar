@@ -1,11 +1,12 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 
 from .models import Event
 from .models import EventDates
 from .models import Category
 from .models import Place
 
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(ModelAdmin):
     list_display = ['title', 'location', 'saved_location', 'organizer', 'category', 'validated', 'get_dates', 'form_link', 'facebook_link', 'email_organizer', 'created_at']
     list_editable = ["validated"]
     list_filter = ["validated", "category", "created_at", "updated_at"]
@@ -24,19 +25,19 @@ class EventAdmin(admin.ModelAdmin):
     def get_dates(self, obj):
         return "|\n".join([str(date) for date in obj.eventdates_set.all()])
 
-class EventDatesAdmin(admin.ModelAdmin):
+class EventDatesAdmin(ModelAdmin):
     list_display = ['event', 'start', 'end']
     list_filter = ['event']
     search_fields = ['event']
     list_editable = ['start', 'end']
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ModelAdmin):
     list_display = ['name', 'parent']
     list_filter = ['parent']
     list_editable = ['parent']
 
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(ModelAdmin):
     list_display = ['name', 'address', 'latitude', 'longitude']
     list_editable = ['address', 'latitude', 'longitude']
 
