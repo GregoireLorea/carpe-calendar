@@ -59,6 +59,7 @@ jobs:
           --port 8000 \
           --memory 512Mi \
           --cpu 1 \
+          --service-account cloudrun-exec@carpestudentem.iam.gserviceaccount.com \
           --project $PROJECT_ID
 
     - name: Get service URL
