@@ -11,5 +11,6 @@ python manage.py collectstatic --no-input
 echo "Attempting database migrations..."
 python manage.py migrate --run-syncdb || echo "Migration failed, continuing..."
 
-echo "Starting server on 0.0.0.0:8000..."
-exec python manage.py runserver 0.0.0.0:8000
+PORT=${PORT:-8000}
+echo "Starting server on 0.0.0.0:${PORT}..."
+exec python manage.py runserver 0.0.0.0:${PORT}
