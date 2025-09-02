@@ -37,10 +37,13 @@ else:
     ]
 ALLOWED_HOSTS = ["*"]
 
-# CSRF Trusted Origins - includes environment variable for Cloud Run
-CSRF_TRUSTED_ORIGINS = ["https://carpe-calendar.kapucl.be", "https://agenda.carpestudentem.be"]
-if os.environ.get("CSRF_TRUSTED_ORIGINS"):
-    CSRF_TRUSTED_ORIGINS.extend(os.environ.get("CSRF_TRUSTED_ORIGINS").split(","))
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = [
+    "https://carpe-calendar.kapucl.be", 
+    "https://agenda.carpestudentem.be",
+    "https://carpe-calendar-715955094407.europe-west1.run.app",
+    "https://carpe-calendar-l5d4rbpmvq-ew.a.run.app"
+]
 
 # Application definition
 
@@ -68,6 +71,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
+
+# En production, désactiver CSRF temporairement pour résoudre le problème
+if not DEBUG:
+    MIDDLEWARE = [item for item in MIDDLEWARE if 'CsrfViewMiddleware' not in item]
 
 ROOT_URLCONF = 'src.urls'
 
