@@ -66,6 +66,7 @@ jobs:
           --set-env-vars "DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}" \
           --set-env-vars "DATABASE_URL=${DATABASE_URL}" \
           --set-env-vars "DJANGO_DEBUG=0" \
+          --add-cloudsql-instances carpestudentem:europe-west1:carpe-calendar-db \
           --project $PROJECT_ID
 
     - name: Get service URL
