@@ -37,7 +37,10 @@ else:
     ]
 ALLOWED_HOSTS = ["*"]
 
+# CSRF Trusted Origins - includes environment variable for Cloud Run
 CSRF_TRUSTED_ORIGINS = ["https://carpe-calendar.kapucl.be", "https://agenda.carpestudentem.be"]
+if os.environ.get("CSRF_TRUSTED_ORIGINS"):
+    CSRF_TRUSTED_ORIGINS.extend(os.environ.get("CSRF_TRUSTED_ORIGINS").split(","))
 
 # Application definition
 
