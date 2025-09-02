@@ -50,6 +50,9 @@ jobs:
         echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
     - name: Deploy to Cloud Run
+      env:
+        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
       run: |
         gcloud run deploy $SERVICE_NAME \
           --image $IMAGE_TAG \
@@ -60,7 +63,9 @@ jobs:
           --memory 512Mi \
           --cpu 1 \
           --service-account cloudrun-exec@carpestudentem.iam.gserviceaccount.com \
-          --set-env-vars "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }},DATABASE_URL=${{ secrets.DATABASE_URL }},DJANGO_DEBUG=0" \
+          --set-env-vars "DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}" \
+          --set-env-vars "DATABASE_URL=${DATABASE_URL}" \
+          --set-env-vars "DJANGO_DEBUG=0" \
           --project $PROJECT_ID
 
     - name: Get service URL
