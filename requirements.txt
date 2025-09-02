@@ -2,3 +2,5 @@ django
 whitenoise
 python-dotenv
 django-unfold
+psycopg2-binary
+dj-database-url

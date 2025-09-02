@@ -2,3 +2,9 @@
 **/__pycache__/
 */.pytest_cache/
 db.sqlite3
+
+# Fichiers de migration de données (ne pas committer)
+data_backup.json
+migrate_db.py
+import_data.py
+create_superuser.py
