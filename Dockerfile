@@ -7,7 +7,6 @@ ENV DJANGO_DEBUG=0
 COPY . .
 
 RUN pip install -r requirements.txt
-RUN python manage.py makemigrations && python manage.py migrate
 
 # EXPOSE 8000
 
