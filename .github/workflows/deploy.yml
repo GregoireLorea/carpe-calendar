@@ -61,6 +61,7 @@ jobs:
           --allow-unauthenticated \
           --memory 512Mi \
           --cpu 1 \
+          --timeout 600 \
           --service-account cloudrun-exec@carpestudentem.iam.gserviceaccount.com \
           --set-env-vars "DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}" \
           --set-env-vars "DATABASE_URL=${DATABASE_URL}" \
