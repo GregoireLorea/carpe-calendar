@@ -19,11 +19,16 @@ PORT=${PORT:-8000}
 echo "PORT environment variable: $PORT"
 echo "Starting server on 0.0.0.0:${PORT}..."
 
-# S'assurer que le port est bien numérique
-if ! [[ "$PORT" =~ ^[0-9]+$ ]]; then
-    echo "Error: PORT is not a number: $PORT"
-    PORT=8000
-    echo "Using default PORT: $PORT"
-fi
+# S'assurer que le port est bien numérique  
+case "$PORT" in
+    ''|*[!0-9]*) 
+        echo "Error: PORT is not a number: $PORT"
+        PORT=8000
+        echo "Using default PORT: $PORT"
+        ;;
+    *) 
+        echo "PORT is valid: $PORT"
+        ;;
+esac
 
-exec python manage.py runserver 0.0.0.0:${PORT}
+exec python manage.py runserver 0.0.0.0:${PORT} --noreload
