@@ -2,7 +2,7 @@
 **/__pycache__/
 */.pytest_cache/
 db.sqlite3
-
+/venv
 # Fichiers de migration de données (ne pas committer)
 data_backup.json
 migrate_db.py
