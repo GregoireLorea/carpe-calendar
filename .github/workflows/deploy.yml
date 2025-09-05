@@ -72,4 +72,4 @@ jobs:
     - name: Get service URL
       run: |
         SERVICE_URL=$(gcloud run services describe $SERVICE_NAME --region $REGION --format 'value(status.url)')
-        echo "🌐 Application déployée à: $SERVICE_URL"
+        echo "🌐  Application déployée à: $SERVICE_URL"
