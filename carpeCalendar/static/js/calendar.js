@@ -43,6 +43,28 @@ const getWeekNumber = (d) => {
             const substract = week <= 5 + 11 ? 5 : 7;
             return "S" + (week - substract).toString();
         }
+        // Année académique 2025-2026 (septembre 2025 - juin 2026)
+        if (37 <= week && week <= 37 + 14) {
+            return "S" + (week - 37).toString();
+        }
+        if (week <= 37 + 14 + 2) {
+            return "Blocus";
+        }
+    }
+    if (d.getFullYear() === 2026) {
+        if ((2 <= week && week <= 4) || (5 + 13 + 2 + 2 < week && week <= 5 + 13 + 2 + 2 + 4)) {
+            return "Examens";
+        }
+        if ((5 + 13 + 2 < week && week <= 5 + 13 + 2 + 2)) {
+            return "Blocus";
+        }
+        if (week == 5 || (5 + 11 < week && week <= 5 + 11 + 2)) {
+            return "Congé";
+        }
+        if (week <= 5 + 13 + 2) {
+            const substract = week <= 5 + 11 ? 5 : 7;
+            return "S" + (week - substract).toString();
+        }
     }
     return "-";
 }
