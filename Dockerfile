@@ -2,7 +2,7 @@
 FROM python:3.11
 
 WORKDIR /code
-ENV DJANGO_DEBUG=0
+ENV DJANGO_DEBUG=1
 
 COPY . .
 

@@ -117,7 +117,7 @@ DATABASES = {
     }
 }
 
-# Utiliser PostgreSQL en production si DATABASE_URL est définie
+# Utiliser MySQL en production si DATABASE_URL est définie
 if os.environ.get('DATABASE_URL'):
     try:
         DATABASES['default'] = dj_database_url.parse(
@@ -125,9 +125,9 @@ if os.environ.get('DATABASE_URL'):
             conn_max_age=600,
             conn_health_checks=True,
         )
-        print("PostgreSQL configuration loaded successfully")
+        print("MySQL configuration loaded successfully")
     except Exception as e:
-        print(f"Failed to configure PostgreSQL: {e}")
+        print(f"Failed to configure MySQL: {e}")
         print("Falling back to SQLite")
 
 
