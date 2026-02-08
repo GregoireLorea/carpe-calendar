@@ -1,8 +1,16 @@
 #!/bin/bash
 set -e
 
-# Utiliser l'environnement virtuel
-PYTHON="/home/gregoire/Documents/carpe-calendar/.venv/bin/python"
+# Définir la commande Python (local vs production)
+if [ -f "/home/gregoire/Documents/carpe-calendar/.venv/bin/python" ]; then
+    # Environnement local
+    PYTHON="/home/gregoire/Documents/carpe-calendar/.venv/bin/python"
+    echo "Using local virtual environment Python"
+else
+    # Production (Cloud Run)
+    PYTHON="python3"
+    echo "Using system Python (production)"
+fi
 
 echo "Starting Django application..."
 
