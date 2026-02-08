@@ -9,3 +9,9 @@ migrate_db.py
 import_data.py
 create_superuser.pyvenv/
 .env
+
+# Certificats SSL (ne jamais committer)
+ssl/
+*.pem
+*.key
+*.crt
