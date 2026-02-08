@@ -1,19 +1,22 @@
 #!/bin/bash
 set -e
 
+# Utiliser l'environnement virtuel
+PYTHON="/home/gregoire/Documents/carpe-calendar/.venv/bin/python"
+
 echo "Starting Django application..."
 
 # Collecte des fichiers statiques (ne doit pas échouer)
 echo "Collecting static files..."
-python manage.py collectstatic --no-input
+$PYTHON manage.py collectstatic --no-input
 
 # Tentative de migration (peut échouer si DB pas accessible)
 echo "Attempting database migrations..."
-python manage.py migrate --run-syncdb || echo "Migration failed, continuing..."
+$PYTHON manage.py migrate --run-syncdb || echo "Migration failed, continuing..."
 
 # Test de connexion DB avant de démarrer le serveur
 echo "Testing database connection..."
-python manage.py check --database default || echo "Database check failed, but continuing..."
+$PYTHON manage.py check --database default || echo "Database check failed, but continuing..."
 
 PORT=${PORT:-8000}
 echo "PORT environment variable: $PORT"
@@ -31,4 +34,4 @@ case "$PORT" in
         ;;
 esac
 
-exec python manage.py runserver 0.0.0.0:${PORT} --noreload
+exec $PYTHON manage.py runserver 0.0.0.0:${PORT} --noreload

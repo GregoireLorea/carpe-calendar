@@ -8,3 +8,4 @@ data_backup.json
 migrate_db.py
 import_data.py
 create_superuser.pyvenv/
+.env

@@ -25,16 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.environ.get("DJANGO_DEBUG", True)))
+DEBUG = bool(int(os.environ.get("DJANGO_DEBUG", "0")))  # False par défaut en production
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Répertoire pour collectstatic
+
 if not DEBUG:
-    STATIC_ROOT = BASE_DIR / "static"
     SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 else:
     SECRET_KEY = 'django-insecure-m(_b(n&)#*$4+9+*0$m=1)%orh6mm!x54g^&x6zo+zg!x3wfml'
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-        BASE_DIR / "carpeCalendar/static",
-    ]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    BASE_DIR / "carpeCalendar/static",
+]
 ALLOWED_HOSTS = ["*"]
 
 # CSRF Trusted Origins
@@ -72,15 +74,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
-# En production, désactiver CSRF temporairement pour résoudre le problème
-if not DEBUG:
-    MIDDLEWARE = [item for item in MIDDLEWARE if 'CsrfViewMiddleware' not in item]
-    
-    # Désactiver les vérifications de migration en production pour éviter les problèmes de permissions
-    import sys
-    if 'runserver' in sys.argv:
-        import django.core.management.commands.runserver as runserver
-        runserver.Command.check_migrations = lambda self: None
+# CSRF protection est maintenant activé pour la production
 
 ROOT_URLCONF = 'src.urls'
 
