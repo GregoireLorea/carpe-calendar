@@ -7,7 +7,8 @@ from .models import Category
 from .models import Place
 
 class EventAdmin(ModelAdmin):
-    list_display = ['title', 'validation_status', 'location', 'organizer', 'category', 'get_dates', 'created_at']
+    list_display = ['title', 'validation_status', 'location', 'organizer', 'category', 'validated', 'get_dates', 'created_at']
+    list_editable = ["validated"]
     list_filter = ["validated", "category", "created_at", "updated_at"]
     search_fields = ["title", "location"]
     actions = ["validate_selected_events", "invalidate_selected_events"]
@@ -40,18 +41,14 @@ class EventAdmin(ModelAdmin):
     readonly_fields = ['created_at', 'updated_at']
 
     def validation_status(self, obj):
-        """Affiche clairement le statut de validation"""
-        # Rafraîchir l'objet depuis la DB pour éviter les problèmes de cache
-        obj.refresh_from_db()
-        
+        """Affiche un statut visuel de validation"""        
         if obj.validated:
             return "✅ VALIDÉ"
         else:
             return "❌ NON VALIDÉ"
     
-    validation_status.short_description = "Statut de validation"
+    validation_status.short_description = "Statut"
     validation_status.admin_order_field = "validated"
-    validation_status.boolean = True  # Permet le tri par boolean
 
     @admin.action(description="✅ Valider les événements sélectionnés")
     def validate_selected_events(self, request, queryset):
