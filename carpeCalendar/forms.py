@@ -7,9 +7,9 @@ class EventForm(forms.Form):
     location = forms.CharField(max_length=200)
     category = forms.CharField(max_length=200)
     organizer = forms.CharField(max_length=200)
-    facebook_link = forms.URLField(max_length=200, required=False)
+    facebook_link = forms.URLField(max_length=500, required=False)
     email_organizer = forms.EmailField(max_length=200, required=False)
-    form_link = forms.URLField(max_length=200, required=False)
+    form_link = forms.URLField(max_length=500, required=False)
 
     pmr_friendly = forms.BooleanField(required=False)
     deaf_friendly = forms.BooleanField(required=False)
@@ -18,8 +18,9 @@ class EventForm(forms.Form):
     granz_filled = forms.BooleanField(required=False)
 
     def clean(self):
-        facebook_link = self.cleaned_data['facebook_link']
-        return
+        cleaned_data = super().clean()
+        facebook_link = cleaned_data.get('facebook_link', '')
+        
         # Check if facebook link is an event link
         if facebook_link and not (
             facebook_link.startswith('https://facebook.com') or
@@ -28,6 +29,8 @@ class EventForm(forms.Form):
             facebook_link.startswith('facebook.com')
         ):
             raise forms.ValidationError("Facebook link must be an event link")
+            
+        return cleaned_data
 
 
 class DateForm(forms.Form):
@@ -35,8 +38,11 @@ class DateForm(forms.Form):
     end = forms.DateTimeField()
 
     def clean(self):
-        start = self.cleaned_data['start']
-        end = self.cleaned_data['end']
+        cleaned_data = super().clean()
+        start = cleaned_data.get('start')
+        end = cleaned_data.get('end')
 
-        if start > end:
+        if start and end and start > end:
             raise forms.ValidationError("End date must be after start date")
+            
+        return cleaned_data

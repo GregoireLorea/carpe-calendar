@@ -16,3 +16,4 @@ ssl/
 *.key
 *.crt
 .env
+staticfiles/

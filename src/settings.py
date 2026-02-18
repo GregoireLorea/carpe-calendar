@@ -119,7 +119,28 @@ if os.environ.get('DATABASE_URL'):
             conn_max_age=600,
             conn_health_checks=True,
         )
-        print("MySQL configuration loaded successfully")
+        
+        # Configuration SSL pour Cloud SQL
+        ssl_cert_path = BASE_DIR / 'ssl' / 'client-cert.pem'
+        ssl_key_path = BASE_DIR / 'ssl' / 'client-key.pem'
+        ssl_ca_path = BASE_DIR / 'ssl' / 'server-ca.pem'
+        
+        # Ajouter les options SSL si les fichiers existent
+        if ssl_cert_path.exists() and ssl_key_path.exists():
+            DATABASES['default']['OPTIONS'] = {
+                'ssl': {
+                    'cert': str(ssl_cert_path),
+                    'key': str(ssl_key_path),
+                }
+            }
+            # Ajouter le CA si disponible
+            if ssl_ca_path.exists():
+                DATABASES['default']['OPTIONS']['ssl']['ca'] = str(ssl_ca_path)
+            
+            print("MySQL configuration with SSL loaded successfully")
+        else:
+            print("MySQL configuration loaded successfully (no SSL)")
+            
     except Exception as e:
         print(f"Failed to configure MySQL: {e}")
         print("Falling back to SQLite")
